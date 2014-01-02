@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Artwork {
+	private int id;
 	private TypesAndTechniques.ArtWorkType type;
 	private Dimensions dimensions;
 	private List<ArtworkPhoto> photos;
