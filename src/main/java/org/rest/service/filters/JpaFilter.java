@@ -2,6 +2,7 @@ package org.rest.service.filters;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -11,6 +12,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.Filter;
 import javax.servlet.ServletException;
 import javax.servlet.FilterConfig;
+
 import java.io.IOException;
 
 public class JpaFilter implements Filter {

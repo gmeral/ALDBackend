@@ -1,4 +1,4 @@
-package org.rest.service.entities;
+package org.rest.service.endpoints;
 
 
 import java.io.FileOutputStream;
@@ -25,15 +25,17 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatDtdDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.ext.h2.H2DataTypeFactory;
+import org.rest.service.dao.AlbumDao;
+import org.rest.service.entities.Album;
 import org.rest.service.filters.JpaUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
 @Path("/sampleservice")
-public class SampleService {
+public class AlbumEndPoints {
 
-	private static final Logger LOG = LoggerFactory.getLogger(SampleService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(AlbumEndPoints.class);
 
 
 
@@ -66,32 +68,36 @@ public class SampleService {
 	@Path("/albums")
 	@Produces("application/xml")
 	public List<Album> listAlbums() {
+		AlbumDao dao = new AlbumDao(); 
 		LOG.info("get Albums XML");
-		return getAllAlbumsQuery();
+		return dao.getAllAlbumsQuery();
 	}
 
 	@GET
 	@Path("/album/{albumId}")
 	@Produces("application/xml")
 	public Album getAlbum(@PathParam("albumId") String albumId) {
+		AlbumDao dao = new AlbumDao(); 
 		LOG.info("get Album XML");
-		return getAlbumByIdQuery(albumId);
+		return dao.getAlbumByIdQuery(albumId);
 	}
 
 	@GET
 	@Path("json/albums")
 	@Produces("application/json")
 	public List<Album> listAlbumsJSON() {
+		AlbumDao dao = new AlbumDao(); 
 		LOG.info("get Albums JSON");
-		return getAllAlbumsQuery();
+		return dao.getAllAlbumsQuery();
 	}
 
 	@GET
 	@Path("json/album/{albumId}")
 	@Produces("application/json")
 	public Album getAlbumJSON(@PathParam("albumId") String albumId) {
+		AlbumDao dao = new AlbumDao(); 
 		LOG.info("get Album JSON");
-		return getAlbumByIdQuery(albumId);
+		return dao.getAlbumByIdQuery(albumId);
 	}
 
 	@POST
@@ -99,7 +105,8 @@ public class SampleService {
 	@Consumes("application/json")
 	public Response persistAlbum(Album album){
 		LOG.info("persistAlbum");
-		EntityManager em= JpaUtil.getEntityManager();
+		AlbumDao dao = new AlbumDao(); 
+		EntityManager em= dao.getEntityManager();
 		EntityTransaction tx=em.getTransaction();
 		try{
 			tx.begin();
@@ -120,42 +127,6 @@ public class SampleService {
 		}
 	}
 
-	public List<Album> getAllAlbumsQuery(){
-		EntityManager em = JpaUtil.getEntityManager();
-		EntityTransaction  tx = em.getTransaction();
-
-		List<Album> list;
-		try{
-			tx.begin();
-			list = em.createQuery("select u from Album u").getResultList();
-			LOG.debug("get all ALbums successfull, result size: "+ list.size());
-		} catch (RuntimeException re) {
-			LOG.error("get all albums failed", re);
-			throw re;
-		}finally{
-			tx.commit();
-		}
-		return list;
-	}
-
-	public Album getAlbumByIdQuery(String id){ 
-		EntityManager em = JpaUtil.getEntityManager();
-		EntityTransaction tx = em.getTransaction();
-
-		Album al;
-		int idParam = Integer.parseInt(id);
-		try{
-			tx.begin();
-			al = em.find(Album.class, idParam);
-			LOG.debug("get ALbums by id successfull, id: "+ id );
-		} catch (RuntimeException re) {
-			LOG.error("get album by id failed", re);
-			throw re;
-		}finally{
-			tx.commit();
-		}
-		return al;
-	}
 	
 	public void dumpDataBase() throws Exception {
 		Class driverClass = Class.forName("org.h2.Driver");
