@@ -19,7 +19,7 @@ public class ArtCollection {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="COLLECTION_ID")
 	private Set<Artwork> artworks;
 	@OneToMany(cascade=CascadeType.ALL)
