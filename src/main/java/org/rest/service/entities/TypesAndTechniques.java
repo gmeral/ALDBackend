@@ -1,6 +1,7 @@
 package org.rest.service.entities;
 
 public class TypesAndTechniques {
+	//TODO Definir ces enums en tant qu'entités ?
 	public enum ArtWorkType {
 		PAINTING,
 		DRAWING,
