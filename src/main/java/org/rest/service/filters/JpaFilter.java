@@ -39,7 +39,7 @@ public class JpaFilter implements Filter {
 	
 	public void init(FilterConfig config) { 
 		destroy();
-		emf = Persistence.createEntityManagerFactory("Albums");
+		emf = Persistence.createEntityManagerFactory("Museum");
 	}
 	
 	public void destroy(){

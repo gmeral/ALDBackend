@@ -38,6 +38,22 @@ public class Artist {
 	public void addArtwork(Artwork aw) {
 		artworks.add(aw);
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Set<Artwork> getArtworks() {
+		return artworks;
+	}
+
+	public void setArtworks(Set<Artwork> artworks) {
+		this.artworks = artworks;
+	}
 	
 	
 }

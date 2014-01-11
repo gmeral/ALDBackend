@@ -4,11 +4,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -33,22 +29,21 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 import org.junit.runners.MethodSorters;
+import org.rest.service.dao.MuseumDao;
 import org.rest.service.entities.Artist;
 import org.rest.service.entities.Artwork;
-import org.rest.service.entities.Comment;
 import org.rest.service.entities.Dimensions;
-import org.rest.service.entities.TypesAndTechniques;
+import org.rest.service.filters.JpaUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ManytoManyPersistenceTests {
-
+public class ArtworkQueriesTests {
 	static EntityManagerFactory emf = Persistence.createEntityManagerFactory("Museum");
 	static EntityManager em;
 	static EntityTransaction tx;
 
-	private static final Logger LOG = LoggerFactory.getLogger(ManytoManyPersistenceTests.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ArtworkQueriesTests.class);
 
 
 	@Rule public TestName name = new TestName();
@@ -63,7 +58,20 @@ public class ManytoManyPersistenceTests {
 	public void initTransaction() throws Exception {
 		em = emf.createEntityManager();
 		tx = em.getTransaction();
+		JpaUtil.ENTITY_MANAGERS.set(em);
 		seedData();
+	}
+	
+	@After
+	public void afterTests() throws Exception {
+		Class driverClass = Class.forName("org.h2.Driver");
+		Connection jdbcConnection = DriverManager.getConnection("jdbc:h2:mem://localhost:9101/dbunit", "sa", "");
+		IDatabaseConnection connection = new DatabaseConnection(jdbcConnection);
+		connection.getConfig().setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new H2DataTypeFactory());
+		// full database export
+		IDataSet fullDataSet = connection.createDataSet();
+		FlatXmlDataSet.write(fullDataSet, new FileOutputStream("target/dbExport/" + name.getMethodName()+ ".xml"));
+		FlatDtdDataSet.write(connection.createDataSet(), new FileOutputStream("target/dbExport/"+  "test2.dtd"));
 	}
 
 	protected void seedData() throws Exception {
@@ -93,8 +101,8 @@ public class ManytoManyPersistenceTests {
 	}
 
 	@Test
-	public void AtestTwoArtistsTwoArtworks() {
-		System.out.println("TROLOLOLO");
+	public void AtestGetArtworksByArtist() {
+		
 		Dimensions dim = new Dimensions(15,20,30);
 		Artwork aw1 = new Artwork(dim, "Chat");
 		Artwork aw2 = new Artwork(dim, "Chien");
@@ -120,21 +128,19 @@ public class ManytoManyPersistenceTests {
 		}finally{
 			tx.commit();
 		}
+		
+		MuseumDao dao = new MuseumDao();
+		Artist ar = new Artist("dogLover");
+		List<Artwork> results = null;
+		LOG.info("AtestGetArtworksByArtist");
+		try {
+		results = dao.getArtworksByArtistQuery(ar);
+		}catch(Exception e) {
+			LOG.warn("getArtworkByArtists : query failed");
+			e.printStackTrace();
+		}
+		for (Artwork aw : results)
+			System.out.println(aw.getTitle());
 	}
-
 	
-	@After
-	public void afterTests() throws Exception {
-		Class driverClass = Class.forName("org.h2.Driver");
-		Connection jdbcConnection = DriverManager.getConnection("jdbc:h2:mem://localhost:9101/dbunit", "sa", "");
-		IDatabaseConnection connection = new DatabaseConnection(jdbcConnection);
-		connection.getConfig().setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new H2DataTypeFactory());
-		// full database export
-		IDataSet fullDataSet = connection.createDataSet();
-		FlatXmlDataSet.write(fullDataSet, new FileOutputStream("target/dbExport/" + name.getMethodName()+ ".xml"));
-		FlatDtdDataSet.write(connection.createDataSet(), new FileOutputStream("target/dbExport/"+  "test.dtd"));
-	}
-
-
-
 }
