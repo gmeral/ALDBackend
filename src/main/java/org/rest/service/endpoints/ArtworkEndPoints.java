@@ -40,6 +40,7 @@ public class ArtworkEndPoints {
 		MuseumDao dao = new MuseumDao();
 		return dao.getAllArtworksQuery();
 	}
+	
 	@Path("/get/byArtist")
 	@Consumes("application/json")
 	@Produces("application/json")
