@@ -44,6 +44,11 @@ public class ArtCollection {
 		tags.addAll(tagSet);
 	}
 
+	public ArtCollection(Set<Artwork> artworksSet) {
+		this();
+		artworks = artworksSet;
+	}
+
 	@XmlElementWrapper
 	public Set<Artwork> getArtworks() {
 		return artworks;

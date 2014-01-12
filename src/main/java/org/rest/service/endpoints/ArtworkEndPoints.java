@@ -16,7 +16,7 @@ import org.rest.service.entities.TypesAndTechniques;
 
 @Path("/museum/artwork")
 public class ArtworkEndPoints {
-	
+
 	static {
 		MuseumDao dao = new MuseumDao();
 		try {
@@ -26,7 +26,7 @@ public class ArtworkEndPoints {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/* ---------------- CREATE -----------------------*/
 	@POST
 	@Path("/add")
@@ -35,7 +35,7 @@ public class ArtworkEndPoints {
 		MuseumDao dao = new MuseumDao();
 		return dao.persistArtwork(aw);
 	}
-	
+
 	/* ---------------- UPDATE -----------------------*/
 	@POST
 	@Path("/update")
@@ -44,7 +44,7 @@ public class ArtworkEndPoints {
 		MuseumDao dao = new MuseumDao();
 		return dao.updateArtwork(aw);
 	}
-	
+
 	/* ---------------- GET -----------------------*/
 	@GET
 	@Path("/get/all")
@@ -53,7 +53,7 @@ public class ArtworkEndPoints {
 		MuseumDao dao = new MuseumDao();
 		return dao.getAllArtworksQuery();
 	}
-	
+
 	@GET
 	@Path("/get/byArtist/{artistName}")
 	@Produces("application/json")
@@ -61,7 +61,7 @@ public class ArtworkEndPoints {
 		MuseumDao dao = new MuseumDao();
 		return dao.getArtworksByArtistQuery(name);
 	}
-	
+
 	@GET
 	@Path("/get/byTechnique/{technique}")
 	@Produces("application/json")
@@ -69,5 +69,12 @@ public class ArtworkEndPoints {
 		MuseumDao dao = new MuseumDao();
 		return dao.getArtworksByTechniqueQuery(tech);
 	}
-	public List<Artwork> getArtworksBySupport(TypesAndTechniques.Technique support){return null;}
+
+	@GET
+	@Path("/get/bySupport/{support}")
+	@Produces("application/json")
+	public List<Artwork> getArtworksBySupport(@PathParam("support")TypesAndTechniques.Support support){
+		MuseumDao dao = new MuseumDao();
+		return dao.getArtworksBySupportQuery(support);
+	}
 }
