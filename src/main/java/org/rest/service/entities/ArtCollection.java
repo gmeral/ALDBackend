@@ -13,8 +13,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 public class ArtCollection {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +26,7 @@ public class ArtCollection {
 	@JoinColumn(name="COLLECTION_ID")
 	private Set<Artwork> artworks;
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="ARTWORK_ID")
+	@JoinColumn(name="ARTCOLLECTION_ID")
 	private List<Comment> comments;
 	@ElementCollection
 	private Set<String> tags;
@@ -40,5 +43,31 @@ public class ArtCollection {
 		comments.addAll(commentList);
 		tags.addAll(tagSet);
 	}
-	
+
+	@XmlElementWrapper
+	public Set<Artwork> getArtworks() {
+		return artworks;
+	}
+
+	public void setArtworks(Set<Artwork> artworks) {
+		this.artworks = artworks;
+	}
+
+	@XmlElementWrapper
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	@XmlElementWrapper
+	public Set<String> getTags() {
+		return tags;
+	}
+
+	public void setTags(Set<String> tags) {
+		this.tags = tags;
+	}
 }

@@ -1,14 +1,4 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
-  <ARTIST ID="1" NAME="dogLover"/>
-  <ARTIST ID="2" NAME="catLover"/>
-  <ARTIST_ARTWORK ARTWORKS_ID="1" ARTISTS_ID="1"/>
-  <ARTIST_ARTWORK ARTWORKS_ID="1" ARTISTS_ID="2"/>
-  <ARTIST_ARTWORK ARTWORKS_ID="2" ARTISTS_ID="1"/>
-  <ARTIST_ARTWORK ARTWORKS_ID="2" ARTISTS_ID="2"/>
-  <ARTWORK ID="1" ISEXPOSED="false" TITLE="Chat" X="15.0" Y="20.0" Z="30.0"/>
-  <ARTWORK ID="2" ISEXPOSED="false" TITLE="Chien" X="15.0" Y="20.0" Z="30.0"/>
-  <ARTWORKPHOTO/>
-  <ARTWORK_TAGS/>
-  <COMMENT/>
+  
 </dataset>

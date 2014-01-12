@@ -8,8 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 public class Comment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,4 +32,23 @@ public class Comment {
 	public Comment() {
 		this(UNDEFINED_STRING, UNDEFINED_STRING, new Date());
 	}
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	public Date getPostDate() {
+		return postDate;
+	}
+	public void setPostDate(Date postDate) {
+		this.postDate = postDate;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	
 }

@@ -20,6 +20,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
@@ -46,7 +47,7 @@ public class Artwork {
 	@OneToMany(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="ARTWORK_ID")
 	private List<ArtworkPhoto> photos;
-	@ManyToMany(mappedBy="artworks")
+	@ManyToMany(cascade=CascadeType.PERSIST)
 	@JoinTable(name="ARTIST_ARTWORK")
 	private Set<Artist> artists;
 	@OneToMany(cascade=CascadeType.ALL)
@@ -157,6 +158,7 @@ public class Artwork {
 		this.creationDate = creationDate;
 	}
 
+	@XmlElementWrapper
 	public Set<String> getTags() {
 		return tags;
 	}
@@ -189,6 +191,7 @@ public class Artwork {
 		this.type = type;
 	}
 
+	@XmlElementWrapper
 	public List<ArtworkPhoto> getPhotos() {
 		return photos;
 	}
@@ -197,6 +200,7 @@ public class Artwork {
 		this.photos = photos;
 	}
 
+	@XmlElementWrapper
 	public Set<Artist> getArtists() {
 		return artists;
 	}
@@ -205,6 +209,7 @@ public class Artwork {
 		this.artists = artists;
 	}
 
+	@XmlElementWrapper
 	public List<Comment> getComments() {
 		return comments;
 	}

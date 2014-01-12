@@ -8,14 +8,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 public class Artist {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	@ManyToMany()
+	@ManyToMany(mappedBy="artists")
 	private Set<Artwork> artworks;
 	
 	public static final String UNDEFINED_NAME_STRING = "UNNAMED";
@@ -47,6 +50,7 @@ public class Artist {
 		this.name = name;
 	}
 
+	@XmlElementWrapper
 	public Set<Artwork> getArtworks() {
 		return artworks;
 	}

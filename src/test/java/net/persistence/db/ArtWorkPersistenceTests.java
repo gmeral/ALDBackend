@@ -33,6 +33,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 import org.junit.runners.MethodSorters;
+import org.rest.service.entities.Artist;
 import org.rest.service.entities.Artwork;
 import org.rest.service.entities.Comment;
 import org.rest.service.entities.Dimensions;
@@ -120,7 +121,7 @@ public class ArtWorkPersistenceTests {
 			tx.commit();
 		}
 	}
-	
+
 	@Test
 	public void CtestArtWorkWithDescription() {
 		Dimensions dim = new Dimensions(20,20,30);
@@ -135,7 +136,7 @@ public class ArtWorkPersistenceTests {
 			tx.commit();
 		}
 	}
-	
+
 	@Test
 	public void DtestArtWorkWithTitle() {
 		Dimensions dim = new Dimensions(20,20,30);
@@ -150,7 +151,7 @@ public class ArtWorkPersistenceTests {
 			tx.commit();
 		}
 	}
-	
+
 	@Test
 	public void EtestArtWorkWithTags() {
 		Dimensions dim = new Dimensions(20,20,30);
@@ -169,7 +170,7 @@ public class ArtWorkPersistenceTests {
 			tx.commit();
 		}
 	}
-	
+
 	@Test
 	public void FtestArtWorkWithDate() {
 		Dimensions dim = new Dimensions(20,20,30);
@@ -189,7 +190,7 @@ public class ArtWorkPersistenceTests {
 			tx.commit();
 		}
 	}
-	
+
 	@Test
 	public void GtestArtWorkWithComments() {
 		Dimensions dim = new Dimensions(20,20,30);
@@ -214,6 +215,27 @@ public class ArtWorkPersistenceTests {
 			tx.commit();
 		}
 	}
+
+	@Test
+	public void HtestArtworkPersistCascade() {
+		Dimensions dim = new Dimensions(20,20,30);
+		Artwork aw = new Artwork(dim,"thing"); 
+		Artist a1 = new Artist("paul");
+		Set<Artist> thingContributors = new HashSet<Artist>();
+		thingContributors.add(a1);
+		aw.setArtists(thingContributors);
+		try {
+			tx.begin();
+			em.persist(aw);
+			em.persist(a1);
+		}catch (RuntimeException re) {
+			LOG.error("DtestArtWorkWithTitle failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+	}
+
 	@After
 	public void afterTests() throws Exception {
 		Class driverClass = Class.forName("org.h2.Driver");

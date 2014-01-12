@@ -83,7 +83,7 @@ public class AlbumEndPoints {
 	}
 
 	@GET
-	@Path("json/albums")
+	@Path("json/album")
 	@Produces("application/json")
 	public List<Album> listAlbumsJSON() {
 		AlbumDao dao = new AlbumDao(); 

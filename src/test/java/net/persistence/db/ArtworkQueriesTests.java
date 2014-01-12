@@ -134,7 +134,7 @@ public class ArtworkQueriesTests {
 		List<Artwork> results = null;
 		LOG.info("AtestGetArtworksByArtist");
 		try {
-		results = dao.getArtworksByArtistQuery(ar);
+		results = dao.getArtworksByArtistQuery(ar.getName());
 		}catch(Exception e) {
 			LOG.warn("getArtworkByArtists : query failed");
 			e.printStackTrace();

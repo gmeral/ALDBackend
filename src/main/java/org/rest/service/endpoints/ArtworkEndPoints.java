@@ -4,12 +4,13 @@ import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import org.rest.service.dao.MuseumDao;
-import org.rest.service.entities.Artist;
 import org.rest.service.entities.Artwork;
 import org.rest.service.entities.TypesAndTechniques;
 
@@ -27,10 +28,22 @@ public class ArtworkEndPoints {
 	}
 	
 	/* ---------------- CREATE -----------------------*/
-	public Response addArtwork(Artwork aw){return null;}
+	@POST
+	@Path("/add")
+	@Consumes("application/json")
+	public Response addArtwork(Artwork aw){
+		MuseumDao dao = new MuseumDao();
+		return dao.persistArtwork(aw);
+	}
 	
 	/* ---------------- UPDATE -----------------------*/
-	public Response updateArtwork(Artwork aw){return null;}
+	@POST
+	@Path("/update")
+	@Consumes("application/json")
+	public Response updateArtwork(Artwork aw){
+		MuseumDao dao = new MuseumDao();
+		return dao.updateArtwork(aw);
+	}
 	
 	/* ---------------- GET -----------------------*/
 	@GET
@@ -41,14 +54,20 @@ public class ArtworkEndPoints {
 		return dao.getAllArtworksQuery();
 	}
 	
-	@Path("/get/byArtist")
-	@Consumes("application/json")
+	@GET
+	@Path("/get/byArtist/{artistName}")
 	@Produces("application/json")
-	public List<Artwork> getArtworksByArtist(Artist ar){
+	public List<Artwork> getArtworksByArtist(@PathParam("artistName") String name){
 		MuseumDao dao = new MuseumDao();
-		return dao.getArtworksByArtistQuery(ar);
+		return dao.getArtworksByArtistQuery(name);
 	}
 	
-	public List<Artwork> getArtworksByTechnique(TypesAndTechniques.Technique tech){return null;}
+	@GET
+	@Path("/get/byTechnique/{technique}")
+	@Produces("application/json")
+	public List<Artwork> getArtworksByTechnique(@PathParam("technique")TypesAndTechniques.Technique tech){
+		MuseumDao dao = new MuseumDao();
+		return dao.getArtworksByTechniqueQuery(tech);
+	}
 	public List<Artwork> getArtworksBySupport(TypesAndTechniques.Technique support){return null;}
 }
