@@ -64,6 +64,31 @@ public class MuseumDao {
 		return list;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public  Artwork getArtworkByIdQuery(String idParam){
+		EntityTransaction  tx = em.getTransaction();
+
+		Artwork artwork;
+		int id = Integer.parseInt(idParam);
+
+		try{
+			tx.begin();
+			//Query q = em.createQuery("SELECT DISTINCT aw FROM Artwork aw, IN (aw.id) i WHERE i = :id");
+			artwork = em.find(Artwork.class, id);
+
+			LOG.debug("Artist id parameter received : " + id);
+			//q.setParameter("id", id);
+			//artwork = (Artwork)q.getSingleResult();
+			LOG.debug("get Artworks by id successfull, result");
+		} catch (RuntimeException re) {
+			LOG.error("get Artworks by id failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+		return artwork;
+	}
+	
 	public  List<Artwork> getArtworksByTagQuery(String tag){
 		EntityTransaction  tx = em.getTransaction();
 
@@ -277,12 +302,20 @@ public class MuseumDao {
 		List<Comment> comList = new ArrayList<Comment>();
 		comList.add(com1);
 		comList.add(com2);
-		Artwork aw = new Artwork(dim, TypesAndTechniques.Technique.AQUARELLE, TypesAndTechniques.ArtWorkType.PAINTING, TypesAndTechniques.Support.ARGILE, "Eh oui j'ai une description", "Et meme un titre ! et des commentaires", tags, cDate, comList);
-		Artist a1 = new Artist("paul");
-		aw.addArtist(a1);
+		Artwork aw1 = new Artwork(dim, TypesAndTechniques.Technique.AQUARELLE, TypesAndTechniques.ArtWorkType.PAINTING, TypesAndTechniques.Support.ARGILE, "Eh oui j'ai une description", "Et meme un titre", tags, cDate, comList);
+		Artwork aw2 = new Artwork(dim, TypesAndTechniques.Technique.AQUARELLE, TypesAndTechniques.ArtWorkType.PAINTING, TypesAndTechniques.Support.ARGILE, "Un splendide truc au milieu de l'eau", "Liberty Island", tags, cDate, comList);
+		Artwork aw3 = new Artwork(dim, TypesAndTechniques.Technique.AQUARELLE, TypesAndTechniques.ArtWorkType.PAINTING, TypesAndTechniques.Support.ARGILE, "Un arbre au milieu d'autres arbres, c'est chouette", "Arbre dans for��t", tags, cDate, comList);
+		Artist a1 = new Artist("Tom Savage");
+		Artist a2 = new Artist("Jack Sparow");
+		Artist a3 = new Artist("Eric Bouya");
+		aw1.addArtist(a1);
+		aw2.addArtist(a2);
+		aw3.addArtist(a3);
 		try {
 			tx.begin();
-			em.persist(aw);
+			em.persist(aw1);
+			em.persist(aw2);
+			em.persist(aw3);
 		}catch (RuntimeException re) {
 			LOG.error("DtestArtWorkWithTitle failed", re);
 			throw re;

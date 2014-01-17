@@ -12,6 +12,8 @@ import javax.servlet.FilterChain;
 import javax.servlet.Filter;
 import javax.servlet.ServletException;
 import javax.servlet.FilterConfig;
+import javax.servlet.http.HttpServletResponse;
+
 
 import java.io.IOException;
 
@@ -25,6 +27,11 @@ public class JpaFilter implements Filter {
 		try{ 
 			em = emf.createEntityManager();
 			JpaUtil.ENTITY_MANAGERS.set(em);
+			 if(response instanceof HttpServletResponse){
+	        HttpServletResponse alteredResponse = ((HttpServletResponse)response);
+
+	        addHeadersFor200Response(alteredResponse);
+	    }
 			chain.doFilter(request,response);
 			JpaUtil.ENTITY_MANAGERS.remove();
 		}finally{
@@ -36,6 +43,13 @@ public class JpaFilter implements Filter {
 			}
 		}
 	}
+
+	 private void addHeadersFor200Response(HttpServletResponse response){
+        //TODO: externalize the Allow-Origin
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
+        response.addHeader("Access-Control-Allow-Headers", "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
+    }
 	
 	public void init(FilterConfig config) { 
 		destroy();

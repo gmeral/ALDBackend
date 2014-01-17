@@ -53,7 +53,15 @@ public class ArtworkEndPoints {
 		MuseumDao dao = new MuseumDao();
 		return dao.getAllArtworksQuery();
 	}
-
+	
+	@GET
+	@Path("/get/{id}")
+	@Produces("application/json")
+	public Artwork getArtworkById(@PathParam("id") String id){
+		MuseumDao dao = new MuseumDao();
+		return dao.getArtworkByIdQuery(id);
+	}
+	
 	@GET
 	@Path("/get/byArtist/{artistName}")
 	@Produces("application/json")
