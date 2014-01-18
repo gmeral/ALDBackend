@@ -32,7 +32,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class MuseumDao {
-	private static final Logger LOG = LoggerFactory.getLogger(AlbumDao.class);
+	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 	private EntityManager em;
 
 	public EntityManager getEntityManager() {
@@ -64,7 +64,6 @@ public class MuseumDao {
 		return list;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public  Artwork getArtworkByIdQuery(String idParam){
 		EntityTransaction  tx = em.getTransaction();
 
@@ -286,6 +285,20 @@ public class MuseumDao {
 		return list;
 	}
 	
+	public Response deleteArtwork(Artwork aw) {
+		EntityTransaction  tx = em.getTransaction();
+		try{
+			tx.begin();
+			em.remove(aw);
+			LOG.debug("delete Artwork successfull : " + aw.getTitle());
+			return Response.ok(aw).build();
+		} catch (RuntimeException re) {
+			LOG.error("delete Artwork failed", re);
+			return Response.status(400).entity("Artwork delete failed!").build();
+		}finally{
+			tx.commit();
+		}
+	}
 	/* ---------------- CREATE CUSTOM -----------------------*/
 	public ArtCollection createCollectionQuery(Set<Artwork> artworks) {
 		EntityTransaction  tx = em.getTransaction();
