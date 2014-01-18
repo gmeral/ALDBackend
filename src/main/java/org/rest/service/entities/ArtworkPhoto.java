@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @XmlRootElement
-public class ArtworkPhoto {
+public class ArtworkPhoto implements MuseumEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
