@@ -148,7 +148,73 @@ public class MuseumDao {
 		return list;
 	}
 	
+	public Artist getArtistByIdQuery(int id){
+		EntityTransaction  tx = em.getTransaction();
+
+		Artist artist;
+
+		try{
+			tx.begin();
+			//Query q = em.createQuery("SELECT DISTINCT aw FROM Artwork aw, IN (aw.id) i WHERE i = :id");
+			artist = em.find(Artist.class, id);
+
+			LOG.debug("Artwork id parameter received : " + id);
+			//q.setParameter("id", id);
+			//artwork = (Artwork)q.getSingleResult();
+			LOG.debug("get Artworks by id successfull, result");
+		} catch (RuntimeException re) {
+			LOG.error("get Artworks by id failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+		return artist;
+	}
 	
+	public Response persistArtist(Artist aw) {
+		EntityTransaction  tx = em.getTransaction();
+		try{
+			tx.begin();
+			em.persist(aw);
+			LOG.debug("add Artist successfull : " + aw.getName());
+			return Response.ok(aw).build();
+		} catch (RuntimeException re) {
+			LOG.error("add Artist failed", re);
+			return Response.status(400).entity("Artist create failed!").build();
+		}finally{
+			tx.commit();
+		}
+	}
+	
+	public Response updateArtist(Artist aw) {
+		EntityTransaction  tx = em.getTransaction();
+		try{
+			tx.begin();
+			em.merge(aw);
+			LOG.debug("update Artist successfull : " + aw.getName());
+			return Response.ok(aw).build();
+		} catch (RuntimeException re) {
+			LOG.error("update Artist failed", re);
+			return Response.status(400).entity("Artist create failed!").build();
+		}finally{
+			tx.commit();
+		}
+	}
+	
+	public Response deleteArtist(Artist aw) {
+		EntityTransaction  tx = em.getTransaction();
+		try{
+			tx.begin();
+			em.remove(aw);
+			LOG.debug("update Artist successfull : " + aw.getName());
+			return Response.ok(aw).build();
+		} catch (RuntimeException re) {
+			LOG.error("update Artist failed", re);
+			return Response.status(400).entity("Artist create failed!").build();
+		}finally{
+			tx.commit();
+		}
+	}
 
 	public Response persistArtwork(Artwork aw) {
 		EntityTransaction  tx = em.getTransaction();
