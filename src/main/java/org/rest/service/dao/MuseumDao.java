@@ -387,6 +387,15 @@ public class MuseumDao {
 		Artist a1 = new Artist("Tom Savage");
 		Artist a2 = new Artist("Jack Sparow");
 		Artist a3 = new Artist("Eric Bouya");
+		a1.setCity("Bordeaux");
+		a2.setCity("Paris");
+		a3.setCity("Lille");
+		a1.setBirthDate(new Date());
+		a2.setBirthDate(new Date());
+		a3.setBirthDate(new Date());
+		a1.setWorkType("Peinture Sculpture");
+		a2.setWorkType("Peinture");
+		a3.setWorkType("Sculpture");
 		aw1.addArtist(a1);
 		aw2.addArtist(a2);
 		aw3.addArtist(a3);
@@ -395,6 +404,10 @@ public class MuseumDao {
 			em.persist(aw1);
 			em.persist(aw2);
 			em.persist(aw3);
+			em.persist(a1);
+			em.persist(a2);
+			em.persist(a3);
+
 		}catch (RuntimeException re) {
 			LOG.error("DtestArtWorkWithTitle failed", re);
 			throw re;
