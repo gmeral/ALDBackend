@@ -11,6 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import org.rest.service.dao.MuseumDao;
+import org.rest.service.entities.Artist;
 import org.rest.service.entities.Artwork;
 import org.rest.service.entities.TypesAndTechniques;
 
@@ -43,6 +44,15 @@ public class ArtworkEndPoints {
 	public Response updateArtwork(Artwork aw){
 		MuseumDao dao = new MuseumDao();
 		return dao.updateArtwork(aw);
+	}
+	
+	/* ---------------- DELETE -----------------------*/
+	@POST
+	@Path("/delete")
+	@Consumes("application/json")
+	public Response deleteArtwork(Artwork ar) {
+		MuseumDao dao = new MuseumDao();
+		return dao.deleteArtwork(ar);
 	}
 
 	/* ---------------- GET -----------------------*/
