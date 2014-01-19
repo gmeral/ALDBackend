@@ -10,7 +10,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
-import org.rest.service.dao.MuseumDao;
+import org.rest.service.dao.ArtCollectionDao;
 import org.rest.service.entities.ArtCollection;
 import org.rest.service.entities.Artwork;
 import org.rest.service.entities.TypesAndTechniques;
@@ -24,7 +24,7 @@ public class CollectionEndPoints {
 	@Consumes("application/json")
 	@Produces("application/json")
 	public ArtCollection createCollection(Set<Artwork> artworks) {
-		MuseumDao dao = new MuseumDao();
+		ArtCollectionDao dao = new ArtCollectionDao();
 		return dao.createCollectionQuery(artworks);
 	}
 
@@ -33,7 +33,7 @@ public class CollectionEndPoints {
 	@Path("/create/byArtist/{artistName}")
 	@Produces("application/json")
 	public ArtCollection createCollectionByArtist(@PathParam("artistName")String artistName) {
-		MuseumDao dao = new MuseumDao();
+		ArtCollectionDao dao = new ArtCollectionDao();
 		return dao.createCollectionByArtistQuery(artistName);
 	}
 	
@@ -41,7 +41,7 @@ public class CollectionEndPoints {
 	@Path("/create/byTechnique/{technique}")
 	@Produces("application/json")
 	public ArtCollection createCollectionByTechnique(@PathParam("technique")TypesAndTechniques.Technique tech) {
-		MuseumDao dao = new MuseumDao();
+		ArtCollectionDao dao = new ArtCollectionDao();
 		return dao.createCollectionByTechniqueQuery(tech);
 	}
 	
@@ -49,7 +49,7 @@ public class CollectionEndPoints {
 	@Path("/create/byTag/{tag}")
 	@Produces("application/json")
 	public ArtCollection createCollectionByTag(@PathParam("tag")String tag) {
-		MuseumDao dao = new MuseumDao();
+		ArtCollectionDao dao = new ArtCollectionDao();
 		return dao.createCollectionByTagQuery(tag);
 	}
 
@@ -58,8 +58,8 @@ public class CollectionEndPoints {
 	@Path("/update")
 	@Consumes("application/json")
 	public Response updateCollection(ArtCollection ac) {
-		MuseumDao dao = new MuseumDao();
-		return dao.updateCollectionQuery(ac);
+		ArtCollectionDao dao = new ArtCollectionDao();
+		return dao.updateEntity(ac);
 	}
 
 	/* ---------------- DELETE -----------------------*/
@@ -67,8 +67,8 @@ public class CollectionEndPoints {
 	@Path("/delete")
 	@Consumes("application/json")
 	public Response deleteCollection(ArtCollection ac) {
-		MuseumDao dao = new MuseumDao();
-		return dao.deleteCollectionQuery(ac);
+		ArtCollectionDao dao = new ArtCollectionDao();
+		return dao.deleteEntity(ac);
 	}
 
 }

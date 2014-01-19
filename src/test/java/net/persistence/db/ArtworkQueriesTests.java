@@ -29,6 +29,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 import org.junit.runners.MethodSorters;
+import org.rest.service.dao.ArtworkDao;
 import org.rest.service.dao.MuseumDao;
 import org.rest.service.entities.Artist;
 import org.rest.service.entities.Artwork;
@@ -129,7 +130,7 @@ public class ArtworkQueriesTests {
 			tx.commit();
 		}
 		
-		MuseumDao dao = new MuseumDao();
+		ArtworkDao dao = new ArtworkDao();
 		Artist ar = new Artist("dogLover");
 		List<Artwork> results = null;
 		LOG.info("AtestGetArtworksByArtist");
