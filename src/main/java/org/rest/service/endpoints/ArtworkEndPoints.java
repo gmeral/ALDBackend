@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.OPTIONS;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -31,7 +32,7 @@ public class ArtworkEndPoints {
 
 	/* ---------------- CREATE -----------------------*/
 	@POST
-	@Path("/add")
+	@Path("/")
 	@Consumes("application/json")
 	public Response addArtwork(Artwork aw){
 		MuseumDao dao = new MuseumDao();
@@ -39,13 +40,13 @@ public class ArtworkEndPoints {
 	}
 
 	@OPTIONS
-	@Path("/add")
+	@Path("/")
 	public void addArtworkOptions(){
 	}
 
 	/* ---------------- UPDATE -----------------------*/
-	@POST
-	@Path("/update")
+	@PUT
+	@Path("/")
 	@Consumes("application/json")
 	public Response updateArtwork(Artwork aw){
 		MuseumDao dao = new MuseumDao();
@@ -71,7 +72,7 @@ public class ArtworkEndPoints {
 	}
 	
 	@GET
-	@Path("/get/{id}")
+	@Path("/{id}")
 	@Produces("application/json")
 	public Artwork getArtworkById(@PathParam("id") String id){
 		MuseumDao dao = new MuseumDao();
