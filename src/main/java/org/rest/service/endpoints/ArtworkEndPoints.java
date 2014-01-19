@@ -10,8 +10,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
+import org.rest.service.dao.ArtworkDao;
 import org.rest.service.dao.MuseumDao;
-import org.rest.service.entities.Artist;
 import org.rest.service.entities.Artwork;
 import org.rest.service.entities.TypesAndTechniques;
 
@@ -33,8 +33,8 @@ public class ArtworkEndPoints {
 	@Path("/add")
 	@Consumes("application/json")
 	public Response addArtwork(Artwork aw){
-		MuseumDao dao = new MuseumDao();
-		return dao.persistArtwork(aw);
+		ArtworkDao dao = new ArtworkDao();
+		return dao.persistEntity(aw);
 	}
 
 	/* ---------------- UPDATE -----------------------*/
@@ -42,8 +42,8 @@ public class ArtworkEndPoints {
 	@Path("/update")
 	@Consumes("application/json")
 	public Response updateArtwork(Artwork aw){
-		MuseumDao dao = new MuseumDao();
-		return dao.updateArtwork(aw);
+		ArtworkDao dao = new ArtworkDao();
+		return dao.updateEntity(aw);
 	}
 	
 	/* ---------------- DELETE -----------------------*/
@@ -51,8 +51,8 @@ public class ArtworkEndPoints {
 	@Path("/delete")
 	@Consumes("application/json")
 	public Response deleteArtwork(Artwork ar) {
-		MuseumDao dao = new MuseumDao();
-		return dao.deleteArtwork(ar);
+		ArtworkDao dao = new ArtworkDao();
+		return dao.deleteEntity(ar);
 	}
 
 	/* ---------------- GET -----------------------*/
@@ -60,23 +60,23 @@ public class ArtworkEndPoints {
 	@Path("/get/all")
 	@Produces("application/json")
 	public List<Artwork> getAllArtworks(){
-		MuseumDao dao = new MuseumDao();
+		ArtworkDao dao = new ArtworkDao();
 		return dao.getAllArtworksQuery();
 	}
 	
 	@GET
 	@Path("/get/{id}")
 	@Produces("application/json")
-	public Artwork getArtworkById(@PathParam("id") String id){
-		MuseumDao dao = new MuseumDao();
-		return dao.getArtworkByIdQuery(id);
+	public Artwork getArtworkById(@PathParam("id") int id){
+		ArtworkDao dao = new ArtworkDao();
+		return (Artwork) dao.getEntityById(id);
 	}
 	
 	@GET
 	@Path("/get/byArtist/{artistName}")
 	@Produces("application/json")
 	public List<Artwork> getArtworksByArtist(@PathParam("artistName") String name){
-		MuseumDao dao = new MuseumDao();
+		ArtworkDao dao = new ArtworkDao();
 		return dao.getArtworksByArtistQuery(name);
 	}
 
@@ -84,7 +84,7 @@ public class ArtworkEndPoints {
 	@Path("/get/byTechnique/{technique}")
 	@Produces("application/json")
 	public List<Artwork> getArtworksByTechnique(@PathParam("technique")TypesAndTechniques.Technique tech){
-		MuseumDao dao = new MuseumDao();
+		ArtworkDao dao = new ArtworkDao();
 		return dao.getArtworksByTechniqueQuery(tech);
 	}
 
@@ -92,7 +92,7 @@ public class ArtworkEndPoints {
 	@Path("/get/bySupport/{support}")
 	@Produces("application/json")
 	public List<Artwork> getArtworksBySupport(@PathParam("support")TypesAndTechniques.Support support){
-		MuseumDao dao = new MuseumDao();
+		ArtworkDao dao = new ArtworkDao();
 		return dao.getArtworksBySupportQuery(support);
 	}
 }

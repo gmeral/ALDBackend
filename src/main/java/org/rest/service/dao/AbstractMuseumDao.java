@@ -4,17 +4,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.ws.rs.core.Response;
 
-import org.rest.service.entities.Artist;
-import org.rest.service.entities.Artwork;
 import org.rest.service.entities.MuseumEntity;
 import org.rest.service.filters.JpaUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public abstract class AbstractMuseumDao {
-	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
-	private EntityManager em;
-	private Class entityClass;
+	protected Logger LOG;
+	protected EntityManager em;
+	protected Class<? extends MuseumEntity> entityClass;
 
 	public EntityManager getEntityManager() {
 		return em;
@@ -23,6 +21,7 @@ public abstract class AbstractMuseumDao {
 	public AbstractMuseumDao() {
 		em = JpaUtil.getEntityManager();
 		entityClass = null;
+		LOG = LoggerFactory.getLogger(this.getClass());
 	}
 	
 	public MuseumEntity getEntityById(int id) {
@@ -30,7 +29,7 @@ public abstract class AbstractMuseumDao {
 		MuseumEntity entity;
 		try{
 			tx.begin();
-			entity= em.find(Artwork.class, id);
+			entity= em.find(entityClass, id);
 		} catch (RuntimeException re) {
 			LOG.error("get Entity by id failed", re);
 			throw re;
