@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.OPTIONS;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -35,6 +36,11 @@ public class ArtworkEndPoints {
 	public Response addArtwork(Artwork aw){
 		MuseumDao dao = new MuseumDao();
 		return dao.persistArtwork(aw);
+	}
+
+	@OPTIONS
+	@Path("/add")
+	public void addArtworkOptions(){
 	}
 
 	/* ---------------- UPDATE -----------------------*/
@@ -86,6 +92,14 @@ public class ArtworkEndPoints {
 	public List<Artwork> getArtworksByTechnique(@PathParam("technique")TypesAndTechniques.Technique tech){
 		MuseumDao dao = new MuseumDao();
 		return dao.getArtworksByTechniqueQuery(tech);
+	}
+	
+	@GET
+	@Path("/get/byType/{type}")
+	@Produces("application/json")
+	public List<Artwork> getArtworksByTechnique(@PathParam("type")TypesAndTechniques.ArtWorkType type){
+		MuseumDao dao = new MuseumDao();
+		return dao.getArtworksByTypeQuery(type);
 	}
 
 	@GET

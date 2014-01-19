@@ -264,6 +264,26 @@ public class MuseumDao {
 		}
 		return list;
 	}
+
+	public  List<Artwork> getArtworksByTypeQuery(TypesAndTechniques.ArtWorkType type){
+		EntityTransaction  tx = em.getTransaction();
+
+		List<Artwork> list;
+		try{
+			tx.begin();
+			Query q = em.createQuery("SELECT DISTINCT aw FROM Artwork aw WHERE aw.type = :type");
+			LOG.debug("Type parameter received : " + type);
+			q.setParameter("type", type);
+			list = q.getResultList();
+			LOG.debug("get Artworks by type successfull, result size: "+ list.size());
+		} catch (RuntimeException re) {
+			LOG.error("get Artworks by type failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+		return list;
+	}
 	
 	public  List<Artwork> getArtworksBySupportQuery(TypesAndTechniques.Support sup){
 		EntityTransaction  tx = em.getTransaction();
@@ -383,7 +403,7 @@ public class MuseumDao {
 		comList.add(com2);
 		Artwork aw1 = new Artwork(dim, TypesAndTechniques.Technique.AQUARELLE, TypesAndTechniques.ArtWorkType.PAINTING, TypesAndTechniques.Support.ARGILE, "Eh oui j'ai une description", "Et meme un titre", tags, cDate, comList);
 		Artwork aw2 = new Artwork(dim, TypesAndTechniques.Technique.AQUARELLE, TypesAndTechniques.ArtWorkType.PAINTING, TypesAndTechniques.Support.ARGILE, "Un splendide truc au milieu de l'eau", "Liberty Island", tags, cDate, comList);
-		Artwork aw3 = new Artwork(dim, TypesAndTechniques.Technique.AQUARELLE, TypesAndTechniques.ArtWorkType.PAINTING, TypesAndTechniques.Support.ARGILE, "Un arbre au milieu d'autres arbres, c'est chouette", "Arbre dans for��t", tags, cDate, comList);
+		Artwork aw3 = new Artwork(dim, TypesAndTechniques.Technique.AQUARELLE, TypesAndTechniques.ArtWorkType.PAINTING, TypesAndTechniques.Support.ARGILE, "Un arbre au milieu d'autres arbres, c'est chouette", "Arbre dans forêt", tags, cDate, comList);
 		Artist a1 = new Artist("Tom Savage");
 		Artist a2 = new Artist("Jack Sparow");
 		Artist a3 = new Artist("Eric Bouya");
