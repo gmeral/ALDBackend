@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 public class ArtworkDao extends AbstractMuseumDao {
 	public ArtworkDao() {
 		super();
-		entityClass = Artist.class;
+		entityClass = Artwork.class;
 		LOG = LoggerFactory.getLogger(this.getClass());
 	}
 	

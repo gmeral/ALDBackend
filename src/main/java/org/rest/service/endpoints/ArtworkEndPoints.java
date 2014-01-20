@@ -7,6 +7,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.OPTIONS;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -39,14 +40,21 @@ public class ArtworkEndPoints {
 		return dao.persistEntity(aw);
 	}
 
+	/* ---------------- OPTIONS -----------------------*/
+
 	@OPTIONS
 	@Path("/")
 	public void addArtworkOptions(){
 	}
 
+	@OPTIONS
+	@Path("/{id}")
+	public void updateArtworkOptions(){
+	}
+
 	/* ---------------- UPDATE -----------------------*/
 	@PUT
-	@Path("/")
+	@Path("/{id}")
 	@Consumes("application/json")
 	public Response updateArtwork(Artwork aw){
 		ArtworkDao dao = new ArtworkDao();
@@ -54,8 +62,8 @@ public class ArtworkEndPoints {
 	}
 	
 	/* ---------------- DELETE -----------------------*/
-	@POST
-	@Path("/delete")
+	@DELETE
+	@Path("/{id}")
 	@Consumes("application/json")
 	public Response deleteArtwork(Artwork ar) {
 		ArtworkDao dao = new ArtworkDao();
