@@ -64,10 +64,9 @@ public class ArtworkEndPoints {
 	/* ---------------- DELETE -----------------------*/
 	@DELETE
 	@Path("/{id}")
-	@Consumes("application/json")
-	public Response deleteArtwork(Artwork ar) {
+	public Response deleteArtwork(@PathParam("id")int id) {
 		ArtworkDao dao = new ArtworkDao();
-		return dao.deleteEntity(ar);
+		return dao.deleteEntity(id);
 	}
 
 	/* ---------------- GET -----------------------*/

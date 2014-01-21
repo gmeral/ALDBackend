@@ -80,4 +80,19 @@ public abstract class AbstractMuseumDao {
 			tx.commit();
 		}
 	}
+	
+	public Response deleteEntity(int id) {
+		EntityTransaction  tx = em.getTransaction();
+		try{
+			tx.begin();
+			MuseumEntity entity = em.find(entityClass, id);
+			em.remove(entity);
+			return Response.ok(entity).build();
+		} catch (RuntimeException re) {
+			LOG.error("delete Entity failed", re);
+			return Response.status(400).entity("Entity delete failed!").build();
+		}finally{
+			tx.commit();
+		}
+	}
 }
