@@ -3,8 +3,10 @@ package org.rest.service.endpoints;
 import java.util.Set;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -54,8 +56,8 @@ public class CollectionEndPoints {
 	}
 
 	/* ---------------- UPDATE -----------------------*/
-	@POST
-	@Path("/update")
+	@PUT
+	@Path("/")
 	@Consumes("application/json")
 	public Response updateCollection(ArtCollection ac) {
 		ArtCollectionDao dao = new ArtCollectionDao();
@@ -63,12 +65,11 @@ public class CollectionEndPoints {
 	}
 
 	/* ---------------- DELETE -----------------------*/
-	@POST
-	@Path("/delete")
-	@Consumes("application/json")
-	public Response deleteCollection(ArtCollection ac) {
+	@DELETE
+	@Path("/{id}")
+	public Response deleteCollection(@PathParam("id") int id) {
 		ArtCollectionDao dao = new ArtCollectionDao();
-		return dao.deleteEntity(ac);
+		return dao.deleteEntity(id);
 	}
 
 }

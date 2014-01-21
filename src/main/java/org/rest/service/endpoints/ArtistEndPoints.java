@@ -3,13 +3,16 @@ package org.rest.service.endpoints;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
+import org.eclipse.persistence.annotations.UnionPartitioning;
 import org.rest.service.dao.ArtistDao;
 import org.rest.service.entities.Artist;
 
@@ -27,8 +30,8 @@ public class ArtistEndPoints {
 	}
 	
 	/* ---------------- UPDATE -----------------------*/
-	@POST
-	@Path("/update")
+	@PUT
+	@Path("/")
 	@Consumes("application/json")
 	public Response updateArtist(Artist ar){
 		ArtistDao dao = new ArtistDao();
@@ -36,12 +39,11 @@ public class ArtistEndPoints {
 	}
 	
 	/* ---------------- DELETE -----------------------*/
-	@POST
-	@Path("/delete")
-	@Consumes("application/json")
-	public Response deleteArtist(Artist ar) {
+	@DELETE
+	@Path("/{id}")
+	public Response deleteArtist(@PathParam("id")int id) {
 		ArtistDao dao = new ArtistDao();
-		return dao.deleteEntity(ar);
+		return dao.deleteEntity(id);
 	}
 
 	/* ---------------- GET -----------------------*/
@@ -54,7 +56,7 @@ public class ArtistEndPoints {
 	}
 	
 	@GET
-	@Path("get/{id}")
+	@Path("/{id}")
 	@Produces("application/json")
 	public Artist getArtistById(@PathParam("id")int id) {
 		ArtistDao dao = new ArtistDao();

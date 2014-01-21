@@ -54,7 +54,7 @@ public class ArtworkEndPoints {
 
 	/* ---------------- UPDATE -----------------------*/
 	@PUT
-	@Path("/{id}")
+	@Path("/")
 	@Consumes("application/json")
 	public Response updateArtwork(Artwork aw){
 		ArtworkDao dao = new ArtworkDao();
