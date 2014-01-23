@@ -34,4 +34,24 @@ public class ArtistDao extends AbstractMuseumDao {
 		}
 		return list;
 	}
+	
+	public  Artist getArtistByNameQuery(String name) {
+		EntityTransaction  tx = em.getTransaction();
+
+		Artist ar;
+		try{
+			tx.begin();
+			Query q = em.createQuery("SELECT DISTINCT ar FROM Artist ar WHERE ar.name := name");
+			q.setParameter("name", name);
+			ar =(Artist)q.getSingleResult();
+
+			LOG.debug("get Artist by name : " + name);
+		} catch (RuntimeException re) {
+			LOG.error("get Artist by name failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+		return ar;
+	}
 }

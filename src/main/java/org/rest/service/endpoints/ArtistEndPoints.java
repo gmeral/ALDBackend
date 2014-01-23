@@ -75,5 +75,13 @@ public class ArtistEndPoints {
 		ArtistDao dao = new ArtistDao();
 		return (Artist)dao.getEntityById(id);
 	}
+	
+	@GET
+	@Path("/byName/{name}")
+	@Produces("application/json")
+	public Artist getArtistByName(@PathParam("name")String name) {
+		ArtistDao dao = new ArtistDao();
+		return dao.getArtistByNameQuery(name);
+	}
 	public List<Artist> getRepresentedArtists() {return null;}
 }
