@@ -7,6 +7,7 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
+import javax.ws.rs.OPTIONS;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -22,16 +23,28 @@ public class ArtistEndPoints {
 	
 	/* ---------------- CREATE -----------------------*/
 	@POST
-	@Path("/add")
+	@Path("/")
 	@Consumes("application/json")
 	public Response addArtist(Artist ar){
 		ArtistDao dao = new ArtistDao();
 		return dao.persistEntity(ar);
 	}
+
+	/* ---------------- OPTIONS -----------------------*/
+
+	@OPTIONS
+	@Path("/")
+	public void addArtistOptions(){
+	}
+
+	@OPTIONS
+	@Path("/{id}")
+	public void updateArtistOptions(){
+	}
 	
 	/* ---------------- UPDATE -----------------------*/
 	@PUT
-	@Path("/")
+	@Path("/{id}")
 	@Consumes("application/json")
 	public Response updateArtist(Artist ar){
 		ArtistDao dao = new ArtistDao();
