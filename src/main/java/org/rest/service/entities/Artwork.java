@@ -44,9 +44,10 @@ public class Artwork implements MuseumEntity{
 	private TypesAndTechniques.Support support;
 	@Enumerated(EnumType.STRING)
 	private TypesAndTechniques.ArtWorkType type;
-	@OneToMany(cascade=CascadeType.PERSIST)
-	@JoinColumn(name="ARTWORK_ID")
-	private List<ArtworkPhoto> photos;
+	//@OneToMany(cascade=CascadeType.PERSIST)
+	//@JoinColumn(name="ARTWORK_ID")
+	//private List<ArtworkPhoto> photos;
+	private String photos;
 	@ManyToMany(cascade=CascadeType.PERSIST)
 	@JoinTable(name="ARTIST_ARTWORK")
 	private Set<Artist> artists;
@@ -122,6 +123,13 @@ public class Artwork implements MuseumEntity{
 		this.id = id;
 	}
 
+	public String getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(String photos) {
+		this.photos = photos;
+	}
 	public Dimensions getDimensions() {
 		return dimensions;
 	}
@@ -195,14 +203,16 @@ public class Artwork implements MuseumEntity{
 		this.type = type;
 	}
 
-	@XmlElementWrapper
-	public List<ArtworkPhoto> getPhotos() {
-		return photos;
-	}
+	// @XmlElementWrapper
+	// public List<ArtworkPhoto> getPhotos() {
+	// 	return photos;
+	// }
 
-	public void setPhotos(List<ArtworkPhoto> photos) {
-		this.photos = photos;
-	}
+	// public void setPhotos(List<ArtworkPhoto> photos) {
+	// 	this.photos = photos;
+	// }
+
+
 
 	@XmlElementWrapper
 	public Set<Artist> getArtists() {

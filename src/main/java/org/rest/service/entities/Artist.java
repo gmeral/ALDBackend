@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.TemporalType;
@@ -24,7 +26,9 @@ public class Artist implements MuseumEntity{
 	private String city;
 	private String nationality;
 	private String photo;
-	private String workType;
+	private String description;
+	@Enumerated(EnumType.STRING)
+	private TypesAndTechniques.ArtWorkType workType;
 	@Temporal(TemporalType.DATE)
 	private Date birthDate;
 	@ManyToMany(mappedBy="artists")
@@ -49,6 +53,14 @@ public class Artist implements MuseumEntity{
 
 	public void addArtwork(Artwork aw) {
 		artworks.add(aw);
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getName() {
@@ -91,11 +103,19 @@ public class Artist implements MuseumEntity{
 		this.photo = photo;
 	}
 	
-	public String getWorkType() {
+	public String getNationality() {
+		return nationality;
+	}
+
+	public void setNationality(String nationality) {
+		this.nationality = nationality;
+	}
+
+	public TypesAndTechniques.ArtWorkType getType() {
 		return workType;
 	}
 
-	public void setWorkType(String workType) {
+	public void setType(TypesAndTechniques.ArtWorkType workType) {
 		this.workType = workType;
 	}
 
