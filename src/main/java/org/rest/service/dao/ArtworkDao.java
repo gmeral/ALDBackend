@@ -4,9 +4,12 @@ import java.util.List;
 
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import javax.ws.rs.core.Response;
 
 import org.rest.service.entities.Artist;
 import org.rest.service.entities.Artwork;
+import org.rest.service.entities.Comment;
+import org.rest.service.entities.MuseumEntity;
 import org.rest.service.entities.TypesAndTechniques;
 import org.slf4j.LoggerFactory;
 
@@ -113,5 +116,11 @@ public class ArtworkDao extends AbstractMuseumDao {
 			tx.commit();
 		}
 		return list;
+	}
+	
+	public Response addCommentQuery(int id, Comment c) {
+		Artwork updatee = (Artwork)this.getEntityById(id);
+		updatee.addComment(c);
+		return this.updateEntity(updatee);
 	}
 }
