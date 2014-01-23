@@ -221,9 +221,7 @@ public class ArtWorkPersistenceTests {
 		Dimensions dim = new Dimensions(20,20,30);
 		Artwork aw = new Artwork(dim,"thing"); 
 		Artist a1 = new Artist("paul");
-		Set<Artist> thingContributors = new HashSet<Artist>();
-		thingContributors.add(a1);
-		aw.setArtists(thingContributors);
+		aw.setArtistName(a1.getName());
 		try {
 			tx.begin();
 			em.persist(aw);

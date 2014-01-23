@@ -115,7 +115,7 @@ public class ArtworkEndPoints {
 	@Path("/get/byType/{type}")
 	@Produces("application/json")
 	public List<Artwork> getArtworksByTechnique(@PathParam("type")TypesAndTechniques.ArtWorkType type){
-		MuseumDao dao = new MuseumDao();
+		ArtworkDao dao = new ArtworkDao();
 		return dao.getArtworksByTypeQuery(type);
 	}
 

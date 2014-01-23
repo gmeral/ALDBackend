@@ -10,10 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.TemporalType;
 import javax.persistence.Temporal;
+
 import java.util.Date;
 
 @Entity
@@ -31,14 +33,14 @@ public class Artist implements MuseumEntity{
 	private TypesAndTechniques.ArtWorkType workType;
 	@Temporal(TemporalType.DATE)
 	private Date birthDate;
-	@ManyToMany(mappedBy="artists")
-	private Set<Artwork> artworks;
+	//@OneToMany(mappedBy="artists")
+	//private Set<Artwork> artworks;
 	
 	public static final String UNDEFINED_NAME_STRING = "UNNAMED";
 	
 	public Artist(){
 		name = UNDEFINED_NAME_STRING;
-		artworks = new HashSet<Artwork>();
+		//artworks = new HashSet<Artwork>();
 	}
 	
 	public Artist(String nameParam){
@@ -48,12 +50,12 @@ public class Artist implements MuseumEntity{
 	
 	public Artist(String nameParam, Set<Artwork> artworksSet){
 		this(nameParam);
-		artworks = artworksSet;
+		//artworks = artworksSet;
 	}
 
-	public void addArtwork(Artwork aw) {
-		artworks.add(aw);
-	}
+//	public void addArtwork(Artwork aw) {
+//		//artworks.add(aw);
+//	}
 
 	public String getDescription() {
 		return description;
@@ -86,14 +88,14 @@ public class Artist implements MuseumEntity{
 		this.birthDate = birthDate;
 	}
 
-	@XmlElementWrapper
-	public Set<Artwork> getArtworks() {
-		return artworks;
-	}
-
-	public void setArtworks(Set<Artwork> artworks) {
-		this.artworks = artworks;
-	}
+//	@XmlElementWrapper
+//	public Set<Artwork> getArtworks() {
+//		return artworks;
+//	}
+//
+//	public void setArtworks(Set<Artwork> artworks) {
+//		this.artworks = artworks;
+//	}
 	
 	public String getPhoto() {
 		return photo;

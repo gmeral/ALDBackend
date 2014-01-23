@@ -48,9 +48,10 @@ public class Artwork implements MuseumEntity{
 	//@JoinColumn(name="ARTWORK_ID")
 	//private List<ArtworkPhoto> photos;
 	private String photos;
-	@ManyToMany(cascade=CascadeType.PERSIST)
-	@JoinTable(name="ARTIST_ARTWORK")
-	private Set<Artist> artists;
+	//@ManyToMany(cascade=CascadeType.PERSIST)
+	//@JoinTable(name="ARTIST_ARTWORK")
+	//private Set<Artist> artists;
+	private String artistName;
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="ARTWORK_ID")
 	private List<Comment> comments;
@@ -60,11 +61,13 @@ public class Artwork implements MuseumEntity{
 	public Artwork() {
 		dimensions = new Dimensions();
 		description = "undescribed";
-		artists = new HashSet<Artist>();
+		//artists = new HashSet<Artist>();
+		artistName = "unknown";
 	}
 	
 	public Artwork(Dimensions dim) {
-		artists = new HashSet<Artist>();
+		this();
+		//artists = new HashSet<Artist>();
 		dimensions = dim;
 	}
 	public Artwork(Dimensions dim, String titleParam) {
@@ -111,9 +114,9 @@ public class Artwork implements MuseumEntity{
 		comments.add(c);
 	}
 	
-	public void addArtist(Artist a) {
-		artists.add(a);
-	}
+//	public void addArtist(Artist a) {
+//		artists.add(a);
+//	}
 
 	public int getId() {
 		return id;
@@ -214,14 +217,14 @@ public class Artwork implements MuseumEntity{
 
 
 
-	@XmlElementWrapper
-	public Set<Artist> getArtists() {
-		return artists;
-	}
-
-	public void setArtists(Set<Artist> artists) {
-		this.artists = artists;
-	}
+//	@XmlElementWrapper
+//	public Set<Artist> getArtists() {
+//		return artists;
+//	}
+//
+//	public void setArtists(Set<Artist> artists) {
+//		this.artists = artists;
+//	}
 
 	@XmlElementWrapper
 	public List<Comment> getComments() {
@@ -230,6 +233,14 @@ public class Artwork implements MuseumEntity{
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public String getArtistName() {
+		return artistName;
+	}
+
+	public void setArtistName(String artistName) {
+		this.artistName = artistName;
 	}
 	
 	

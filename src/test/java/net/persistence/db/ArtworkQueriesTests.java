@@ -109,14 +109,8 @@ public class ArtworkQueriesTests {
 		Artwork aw2 = new Artwork(dim, "Chien");
 		Artist a1 = new Artist("catLover");
 		Artist a2 = new Artist("dogLover");
-		aw1.addArtist(a1);
-		aw1.addArtist(a2);
-		aw2.addArtist(a1);
-		aw2.addArtist(a2);
-		a1.addArtwork(aw1);
-		a1.addArtwork(aw2);
-		a2.addArtwork(aw1);
-		a2.addArtwork(aw2);
+		aw1.setArtistName(a1.getName());
+		aw2.setArtistName(a2.getName());
 		try {
 			tx.begin();
 			em.persist(aw1);
