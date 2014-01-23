@@ -53,6 +53,11 @@ public class ArtworkEndPoints {
 	public void updateArtworkOptions(){
 	}
 
+	@OPTIONS
+	@Path("/addComment/{id}")
+	public void addCommentOptions(){
+	}
+
 	/* ---------------- UPDATE -----------------------*/
 	@PUT
 	@Path("/{id}")
@@ -64,6 +69,7 @@ public class ArtworkEndPoints {
 	
 	@PUT 
 	@Path("/addComment/{id}") 
+	@Consumes("application/json")
 	public Response addComment(Comment c, @PathParam("id") int id){
 		ArtworkDao dao = new ArtworkDao();
 		return dao.addCommentQuery(id, c);
