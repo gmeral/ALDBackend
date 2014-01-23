@@ -53,6 +53,11 @@ public class ArtworkEndPoints {
 	public void updateArtworkOptions(){
 	}
 
+	@OPTIONS
+	@Path("/addComment/{id}")
+	public void addCommentOptions(){
+	}
+
 	/* ---------------- UPDATE -----------------------*/
 	@PUT
 	@Path("/{id}")
