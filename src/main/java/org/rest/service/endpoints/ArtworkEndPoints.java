@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 import org.rest.service.dao.ArtworkDao;
 import org.rest.service.dao.MuseumDao;
 import org.rest.service.entities.Artwork;
+import org.rest.service.entities.Comment;
 import org.rest.service.entities.TypesAndTechniques;
 
 @Path("/museum/artwork")
@@ -59,6 +60,13 @@ public class ArtworkEndPoints {
 	public Response updateArtwork(Artwork aw){
 		ArtworkDao dao = new ArtworkDao();
 		return dao.updateEntity(aw);
+	}
+	
+	@PUT 
+	@Path("/addComment/{id}") 
+	public Response addComment(Comment c, @PathParam("id") int id){
+		ArtworkDao dao = new ArtworkDao();
+		return dao.addCommentQuery(id, c);
 	}
 	
 	/* ---------------- DELETE -----------------------*/

@@ -106,6 +106,10 @@ public class Artwork implements MuseumEntity{
 		comments = comList;
 	}
 	
+	public void addComment(Comment c) {
+		comments.add(c);
+	}
+	
 	public void addArtist(Artist a) {
 		artists.add(a);
 	}
