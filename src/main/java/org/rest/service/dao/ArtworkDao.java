@@ -20,31 +20,12 @@ public class ArtworkDao extends AbstractMuseumDao {
 		LOG = LoggerFactory.getLogger(this.getClass());
 	}
 	
-//	public  List<Artwork> getArtworksByArtistQuery(String name){
-//		EntityTransaction  tx = em.getTransaction();
-//		List<Artwork> list;
-//		try{
-//			tx.begin();
-//			Query q = em.createQuery("SELECT DISTINCT aw FROM Artwork aw, IN (aw.artists) a WHERE a.name = :name");
-//			LOG.debug("Artist name parameter received : " + name);
-//			q.setParameter("name", name);
-//			list = q.getResultList();
-//			LOG.debug("get Artworks by artist successfull, result size: "+ list.size());
-//		} catch (RuntimeException re) {
-//			LOG.error("get Artworks by artist failed", re);
-//			throw re;
-//		}finally{
-//			tx.commit();
-//		}
-//		return list;
-//	}
-	
 	public  List<Artwork> getArtworksByArtistQuery(String name){
 		EntityTransaction  tx = em.getTransaction();
 		List<Artwork> list;
 		try{
 			tx.begin();
-			Query q = em.createQuery("SELECT DISTINCT aw FROM Artwork aw WHERE aw.artistName = :name");
+			Query q = em.createQuery("SELECT DISTINCT aw FROM Artwork aw, IN (aw.artist) a WHERE a.name = :name");
 			LOG.debug("Artist name parameter received : " + name);
 			q.setParameter("name", name);
 			list = q.getResultList();
@@ -136,26 +117,26 @@ public class ArtworkDao extends AbstractMuseumDao {
 		}
 		return list;
 	}
-	
-	public  List<Artwork> getArtworksByTypeQuery(TypesAndTechniques.ArtWorkType type){
-		EntityTransaction  tx = em.getTransaction();
 
-		List<Artwork> list;
-		try{
-			tx.begin();
-			Query q = em.createQuery("SELECT DISTINCT aw FROM Artwork aw WHERE aw.type = :type");
-			LOG.debug("Type parameter received : " + type);
-			q.setParameter("type", type);
-			list = q.getResultList();
-			LOG.debug("get Artworks by type successfull, result size: "+ list.size());
-		} catch (RuntimeException re) {
-			LOG.error("get Artworks by type failed", re);
-			throw re;
-		}finally{
-			tx.commit();
-		}
-		return list;
-	}
+	 public  List<Artwork> getArtworksByTypeQuery(TypesAndTechniques.ArtWorkType type){
+                EntityTransaction  tx = em.getTransaction();
+
+                List<Artwork> list;
+                try{
+                        tx.begin();
+                        Query q = em.createQuery("SELECT DISTINCT aw FROM Artwork aw WHERE aw.type = :type");
+                        LOG.debug("Type parameter received : " + type);
+                        q.setParameter("type", type);
+                        list = q.getResultList();
+                        LOG.debug("get Artworks by type successfull, result size: "+ list.size());
+                } catch (RuntimeException re) {
+                        LOG.error("get Artworks by type failed", re);
+                        throw re;
+                }finally{
+                        tx.commit();
+                }
+                return list;
+        }
 	
 	public Response addCommentQuery(int id, Comment c) {
 		Artwork updatee = (Artwork)this.getEntityById(id);

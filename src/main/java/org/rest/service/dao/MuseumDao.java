@@ -61,6 +61,7 @@ public class MuseumDao {
 		Artwork aw1 = new Artwork(dim, TypesAndTechniques.Technique.AQUARELLE, TypesAndTechniques.ArtWorkType.PAINTING, TypesAndTechniques.Support.ARGILE, "Eh oui j'ai une description", "Et meme un titre", tags, cDate, comList);
 		Artwork aw2 = new Artwork(dim, TypesAndTechniques.Technique.AQUARELLE, TypesAndTechniques.ArtWorkType.PAINTING, TypesAndTechniques.Support.ARGILE, "Un splendide truc au milieu de l'eau", "Liberty Island", tags, cDate, comList);
 		Artwork aw3 = new Artwork(dim, TypesAndTechniques.Technique.AQUARELLE, TypesAndTechniques.ArtWorkType.PAINTING, TypesAndTechniques.Support.ARGILE, "Un arbre au milieu d'autres arbres, c'est chouette", "Arbre dans forêt", tags, cDate, comList);
+		aw1.setPhotos("http://www.bubblews.com/assets/images/news/1030462292_1387305050.gif,http://hdwallres.com/wp-content/uploads/2013/10/art-image-wallpaper.jpg,http://us.123rf.com/400wm/400/400/sommai/sommai1111/sommai111100015/11108757-naive-fond-grunge-d-39-art.jpg,http://sola.org/wp-content/uploads/2013/10/Activities-Art-Image.jpg");
 		Artist a1 = new Artist("Tom Savage");
 		Artist a2 = new Artist("Jack Sparow");
 		Artist a3 = new Artist("Eric Bouya");
