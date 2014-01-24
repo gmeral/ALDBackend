@@ -20,24 +20,43 @@ public class ArtworkDao extends AbstractMuseumDao {
 		LOG = LoggerFactory.getLogger(this.getClass());
 	}
 	
-	public  List<Artwork> getArtworksByArtistQuery(String name){
-		EntityTransaction  tx = em.getTransaction();
-		List<Artwork> list;
-		try{
-			tx.begin();
-			Query q = em.createQuery("SELECT DISTINCT aw FROM Artwork aw, IN (aw.artist) a WHERE a.name = :name");
-			LOG.debug("Artist name parameter received : " + name);
-			q.setParameter("name", name);
-			list = q.getResultList();
-			LOG.debug("get Artworks by artist successfull, result size: "+ list.size());
-		} catch (RuntimeException re) {
-			LOG.error("get Artworks by artist failed", re);
-			throw re;
-		}finally{
-			tx.commit();
-		}
-		return list;
-	}
+	// public  List<Artwork> getArtworksByArtistQuery(String name){
+	// 	EntityTransaction  tx = em.getTransaction();
+	// 	List<Artwork> list;
+	// 	try{
+	// 		tx.begin();
+	// 		Query q = em.createQuery("SELECT DISTINCT aw FROM Artwork aw, IN (aw.artists) a WHERE a.name = :name");
+	// 		LOG.debug("Artist name parameter received : " + name);
+	// 		q.setParameter("name", name);
+	// 		list = q.getResultList();
+	// 		LOG.debug("get Artworks by artist successfull, result size: "+ list.size());
+	// 	} catch (RuntimeException re) {
+	// 		LOG.error("get Artworks by artist failed", re);
+	// 		throw re;
+	// 	}finally{
+	// 		tx.commit();
+	// 	}
+	// 	return list;
+	// }
+
+   public  List<Artwork> getArtworksByArtistQuery(String name){
+        EntityTransaction  tx = em.getTransaction();
+        List<Artwork> list;
+        try{
+                tx.begin();
+                Query q = em.createQuery("SELECT DISTINCT aw FROM Artwork aw WHERE aw.artistName = :name");
+                LOG.debug("Artist name parameter received : " + name);
+                q.setParameter("name", name);
+                list = q.getResultList();
+                LOG.debug("get Artworks by artist successfull, result size: "+ list.size());
+        } catch (RuntimeException re) {
+                LOG.error("get Artworks by artist failed", re);
+                throw re;
+        }finally{
+                tx.commit();
+        }
+        return list;
+    }
 	
 	public  List<Artwork> getArtworksByTagQuery(String tag){
 		EntityTransaction  tx = em.getTransaction();
