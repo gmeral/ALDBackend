@@ -45,9 +45,9 @@ public class ArtworkDao extends AbstractMuseumDao {
 		List<Artwork> list;
 		try{
 			tx.begin();
-			Query q = em.createQuery("SELECT DISTINCT aw FROM Artwork aw WHERE aw.artistName = :name");
+			Query q = em.createQuery("SELECT DISTINCT aw FROM Artwork aw WHERE aw.artistName REGEXP :name");
 			LOG.debug("Artist name parameter received : " + name);
-			q.setParameter("name", name);
+			q.setParameter("name", ".*" + name + ".*");
 			list = q.getResultList();
 			LOG.debug("get Artworks by artist successfull, result size: "+ list.size());
 		} catch (RuntimeException re) {
