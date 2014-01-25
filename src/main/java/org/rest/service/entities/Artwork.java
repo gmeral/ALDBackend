@@ -110,6 +110,11 @@ public class Artwork implements MuseumEntity{
 		comments = comList;
 	}
 	
+	public Artwork(String t) {
+		this();
+		this.title = t;
+	}
+
 	public void addComment(Comment c) {
 		comments.add(c);
 	}
@@ -181,6 +186,8 @@ public class Artwork implements MuseumEntity{
 	public void setTags(Set<String> tags) {
 		this.tags = tags;
 	}
+	
+	
 
 	public TypesAndTechniques.Technique getTechnique() {
 		return technique;
