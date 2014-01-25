@@ -84,6 +84,14 @@ public class ArtistEndPoints {
 		return dao.getArtistByNameQuery(name);
 	}
 	
+	@GET 
+	@Path("/listByName/{name}")
+	@Produces("application/json")
+	public List<Artist> getArtistListByName(@PathParam("name")String name) {
+		ArtistDao dao = new ArtistDao();
+		return dao.getArtistListByNameQuery(name);
+	}
+
 	@GET
 	@Path("/byCity/{city}")
 	@Produces("application/json")
