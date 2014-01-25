@@ -4,7 +4,9 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -30,7 +32,6 @@ import org.junit.Test;
 import org.junit.rules.TestName;
 import org.junit.runners.MethodSorters;
 import org.rest.service.dao.ArtworkDao;
-import org.rest.service.dao.MuseumDao;
 import org.rest.service.entities.Artist;
 import org.rest.service.entities.Artwork;
 import org.rest.service.entities.Dimensions;
@@ -101,41 +102,67 @@ public class ArtworkQueriesTests {
 		}
 	}
 
+//	@Test
+//	public void AtestGetArtworksByArtist() {
+//		
+//		Dimensions dim = new Dimensions(15,20,30);
+//		Artwork aw1 = new Artwork(dim, "Chat");
+//		Artwork aw2 = new Artwork(dim, "Chien");
+//		Artist a1 = new Artist("catLover");
+//		Artist a2 = new Artist("dogLover");
+//		aw1.setArtistName(a1.getName());
+//		aw2.setArtistName(a2.getName());
+//		try {
+//			tx.begin();
+//			em.persist(aw1);
+//			em.persist(aw2);
+//			em.persist(a1);
+//			em.persist(a2);
+//		}catch (RuntimeException re) {
+//			LOG.error("AtestTwoArtistsTwoArtworks failed", re);
+//			throw re;
+//		}finally{
+//			tx.commit();
+//		}
+//		
+//		ArtworkDao dao = new ArtworkDao();
+//		Artist ar = new Artist("dogLover");
+//		List<Artwork> results = null;
+//		LOG.info("AtestGetArtworksByArtist");
+//		try {
+//		results = dao.getArtworksByArtistQuery(ar.getName());
+//		}catch(Exception e) {
+//			LOG.warn("getArtworkByArtists : query failed");
+//			e.printStackTrace();
+//		}
+//		for (Artwork aw : results)
+//			System.out.println(aw.getTitle());
+//	}
+	
 	@Test
-	public void AtestGetArtworksByArtist() {
+	public void BtestGetArtworkByTag() {
+		Artwork aw1 = new Artwork("WOW");
+		Set<String> tags1 = new HashSet<>();
+		tags1.add("WOW");
+		aw1.setTags(tags1);
 		
-		Dimensions dim = new Dimensions(15,20,30);
-		Artwork aw1 = new Artwork(dim, "Chat");
-		Artwork aw2 = new Artwork(dim, "Chien");
-		Artist a1 = new Artist("catLover");
-		Artist a2 = new Artist("dogLover");
-		aw1.setArtistName(a1.getName());
-		aw2.setArtistName(a2.getName());
+		Artwork aw2 = new Artwork("AWESOME");
+		Set<String> tags2 = new HashSet<>();
+		tags2.add("AWESOME");
+		aw2.setTags(tags2);
+		
 		try {
 			tx.begin();
 			em.persist(aw1);
 			em.persist(aw2);
-			em.persist(a1);
-			em.persist(a2);
 		}catch (RuntimeException re) {
-			LOG.error("AtestTwoArtistsTwoArtworks failed", re);
+			LOG.error("BtestTwoArtistsTwoArtworks failed", re);
 			throw re;
 		}finally{
 			tx.commit();
 		}
 		
 		ArtworkDao dao = new ArtworkDao();
-		Artist ar = new Artist("dogLover");
-		List<Artwork> results = null;
-		LOG.info("AtestGetArtworksByArtist");
-		try {
-		results = dao.getArtworksByArtistQuery(ar.getName());
-		}catch(Exception e) {
-			LOG.warn("getArtworkByArtists : query failed");
-			e.printStackTrace();
-		}
-		for (Artwork aw : results)
-			System.out.println(aw.getTitle());
+		System.out.println(dao.getArtworksByTagQuery("WOW"));
 	}
-	
 }

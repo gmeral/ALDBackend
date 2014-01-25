@@ -131,7 +131,7 @@ public class ArtworkEndPoints {
 		ArtworkDao dao = new ArtworkDao();
 		return dao.getArtworksByTypeQuery(type);
 	}
-
+	
 	@GET
 	@Path("/get/bySupport/{support}")
 	@Produces("application/json")

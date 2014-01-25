@@ -1,5 +1,6 @@
 package org.rest.service.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityTransaction;
@@ -19,7 +20,7 @@ public class ArtworkDao extends AbstractMuseumDao {
 		entityClass = Artwork.class;
 		LOG = LoggerFactory.getLogger(this.getClass());
 	}
-	
+
 	// public  List<Artwork> getArtworksByArtistQuery(String name){
 	// 	EntityTransaction  tx = em.getTransaction();
 	// 	List<Artwork> list;
@@ -39,45 +40,36 @@ public class ArtworkDao extends AbstractMuseumDao {
 	// 	return list;
 	// }
 
-   public  List<Artwork> getArtworksByArtistQuery(String name){
-        EntityTransaction  tx = em.getTransaction();
-        List<Artwork> list;
-        try{
-                tx.begin();
-                Query q = em.createQuery("SELECT DISTINCT aw FROM Artwork aw WHERE aw.artistName = :name");
-                LOG.debug("Artist name parameter received : " + name);
-                q.setParameter("name", name);
-                list = q.getResultList();
-                LOG.debug("get Artworks by artist successfull, result size: "+ list.size());
-        } catch (RuntimeException re) {
-                LOG.error("get Artworks by artist failed", re);
-                throw re;
-        }finally{
-                tx.commit();
-        }
-        return list;
-    }
-	
-	public  List<Artwork> getArtworksByTagQuery(String tag){
+	public  List<Artwork> getArtworksByArtistQuery(String name){
 		EntityTransaction  tx = em.getTransaction();
-
 		List<Artwork> list;
 		try{
 			tx.begin();
-			Query q = em.createQuery("SELECT DISTINCT aw FROM Artwork aw, IN (aw.tags) t WHERE t = :tag");
-			LOG.debug("Artist name parameter received : " + tag);
-			q.setParameter("tag", tag);
+			Query q = em.createQuery("SELECT DISTINCT aw FROM Artwork aw WHERE aw.artistName = :name");
+			LOG.debug("Artist name parameter received : " + name);
+			q.setParameter("name", name);
 			list = q.getResultList();
-			LOG.debug("get Artworks by tag successfull, result size: "+ list.size());
+			LOG.debug("get Artworks by artist successfull, result size: "+ list.size());
 		} catch (RuntimeException re) {
-			LOG.error("get Artworks by tag failed", re);
+			LOG.error("get Artworks by artist failed", re);
 			throw re;
 		}finally{
 			tx.commit();
 		}
 		return list;
 	}
-	
+
+	public  List<Artwork> getArtworksByTagQuery(String tag){
+		ArtworkDao dao = new ArtworkDao();
+		List<Artwork> list;
+		List<Artwork> resultList = new ArrayList<>();
+		list = dao.getAllArtworksQuery();
+		for (Artwork aw : list)
+			if (aw.getTags().contains(tag))
+				resultList.add(aw);
+		return resultList;
+	}
+
 	public  List<Artwork> getAllArtworksQuery() {
 		EntityTransaction  tx = em.getTransaction();
 
@@ -96,7 +88,7 @@ public class ArtworkDao extends AbstractMuseumDao {
 		}
 		return list;
 	}
-	
+
 	public  List<Artwork> getArtworksByTechniqueQuery(TypesAndTechniques.Technique tech){
 		EntityTransaction  tx = em.getTransaction();
 
@@ -116,7 +108,7 @@ public class ArtworkDao extends AbstractMuseumDao {
 		}
 		return list;
 	}
-	
+
 	public  List<Artwork> getArtworksBySupportQuery(TypesAndTechniques.Support sup){
 		EntityTransaction  tx = em.getTransaction();
 
@@ -137,26 +129,26 @@ public class ArtworkDao extends AbstractMuseumDao {
 		return list;
 	}
 
-	 public  List<Artwork> getArtworksByTypeQuery(TypesAndTechniques.ArtWorkType type){
-                EntityTransaction  tx = em.getTransaction();
+	public  List<Artwork> getArtworksByTypeQuery(TypesAndTechniques.ArtWorkType type){
+		EntityTransaction  tx = em.getTransaction();
 
-                List<Artwork> list;
-                try{
-                        tx.begin();
-                        Query q = em.createQuery("SELECT DISTINCT aw FROM Artwork aw WHERE aw.type = :type");
-                        LOG.debug("Type parameter received : " + type);
-                        q.setParameter("type", type);
-                        list = q.getResultList();
-                        LOG.debug("get Artworks by type successfull, result size: "+ list.size());
-                } catch (RuntimeException re) {
-                        LOG.error("get Artworks by type failed", re);
-                        throw re;
-                }finally{
-                        tx.commit();
-                }
-                return list;
-        }
-	
+		List<Artwork> list;
+		try{
+			tx.begin();
+			Query q = em.createQuery("SELECT DISTINCT aw FROM Artwork aw WHERE aw.type = :type");
+			LOG.debug("Type parameter received : " + type);
+			q.setParameter("type", type);
+			list = q.getResultList();
+			LOG.debug("get Artworks by type successfull, result size: "+ list.size());
+		} catch (RuntimeException re) {
+			LOG.error("get Artworks by type failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+		return list;
+	}
+
 	public Response addCommentQuery(int id, Comment c) {
 		Artwork updatee = (Artwork)this.getEntityById(id);
 		updatee.addComment(c);
