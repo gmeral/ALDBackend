@@ -61,6 +61,8 @@ public class MuseumDao {
 		Artwork aw1 = new Artwork(dim, TypesAndTechniques.Technique.AQUARELLE, TypesAndTechniques.ArtWorkType.PAINTING, TypesAndTechniques.Support.ARGILE, "Eh oui j'ai une description", "Et meme un titre", tags, cDate, comList);
 		Artwork aw2 = new Artwork(dim, TypesAndTechniques.Technique.AQUARELLE, TypesAndTechniques.ArtWorkType.PAINTING, TypesAndTechniques.Support.ARGILE, "Un splendide truc au milieu de l'eau", "Liberty Island", tags, cDate, comList);
 		Artwork aw3 = new Artwork(dim, TypesAndTechniques.Technique.AQUARELLE, TypesAndTechniques.ArtWorkType.PAINTING, TypesAndTechniques.Support.ARGILE, "Un arbre au milieu d'autres arbres, c'est chouette", "Arbre dans forêt", tags, cDate, comList);
+		aw1.setPhotos("http://medias.jds.fr/article/29714/les_5_questions_a_se_poser_lors_de_l_achat_d_une_o_600C.jpg,http://www.bfmtv.com/i/580/290/283972.jpg,http://art-contemporain-graal.fr/artiste-contemporain/photos-artistes-oeuvres/oeuvres/oeuvre-d-art-zdz402.jpg");
+		aw2.setPhotos("http://www.rireduciel.com/images_galerie_peinture_abstraite_01/nature_vive_peinture_abstraite_contemporaine.jpg,http://christian.brown.pagesperso-orange.fr/abstraits/images/abstrait207.jpg");
 		Artist a1 = new Artist("Tom Savage");
 		Artist a2 = new Artist("Jack Sparow");
 		Artist a3 = new Artist("Eric Bouya");
