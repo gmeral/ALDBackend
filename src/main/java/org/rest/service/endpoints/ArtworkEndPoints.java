@@ -109,6 +109,14 @@ public class ArtworkEndPoints {
 	}
 
 	@GET
+	@Path("/get/byTag/{tag}")
+	@Produces("application/json")
+	public List<Artwork> getArtworksByTag(@PathParam("tag") String tag){
+		ArtworkDao dao = new ArtworkDao();
+		return dao.getArtworksByTagQuery(tag);
+	}
+
+	@GET
 	@Path("/get/byTechnique/{technique}")
 	@Produces("application/json")
 	public List<Artwork> getArtworksByTechnique(@PathParam("technique")TypesAndTechniques.Technique tech){
@@ -119,7 +127,7 @@ public class ArtworkEndPoints {
 	@GET
 	@Path("/get/byType/{type}")
 	@Produces("application/json")
-	public List<Artwork> getArtworksByTechnique(@PathParam("type")TypesAndTechniques.ArtWorkType type){
+	public List<Artwork> getArtworksByType(@PathParam("type")TypesAndTechniques.ArtWorkType type){
 		ArtworkDao dao = new ArtworkDao();
 		return dao.getArtworksByTypeQuery(type);
 	}
