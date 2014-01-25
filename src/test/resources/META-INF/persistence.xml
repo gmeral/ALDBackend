@@ -12,7 +12,6 @@
 		<class> org.rest.service.entities.Comment </class>
 		<class> org.rest.service.entities.TypesAndTechniques </class>
 		<class> org.rest.service.entities.Album </class>
-		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		<properties>
 			<property name="eclipselink.target-database"
 				value="org.eclipse.persistence.platform.database.H2Platform" />

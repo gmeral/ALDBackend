@@ -34,6 +34,7 @@ public class ArtistDao extends AbstractMuseumDao {
 		}
 		return list;
 	}
+	
 	public  Artist getArtistByNameQuery(String name) {
 		EntityTransaction  tx = em.getTransaction();
 
@@ -47,6 +48,46 @@ public class ArtistDao extends AbstractMuseumDao {
 			LOG.debug("get Artist by name : " + name);
 		} catch (RuntimeException re) {
 			LOG.error("get Artist by name failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+		return ar;
+	}
+	
+	public  List<Artist> getArtistByCityQuery(String city) {
+		EntityTransaction  tx = em.getTransaction();
+
+		List<Artist> ar;
+		try{
+			tx.begin();
+			Query q = em.createQuery("SELECT DISTINCT ar FROM Artist ar WHERE ar.city REGEXP :city");
+			q.setParameter("city", ".*" + city + ".*");
+			ar =q.getResultList();
+
+			LOG.debug("get Artist by city : " + city);
+		} catch (RuntimeException re) {
+			LOG.error("get Artist by city failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+		return ar;
+	}
+	
+	public  List<Artist> getArtistByNationalityQuery(String nationality) {
+		EntityTransaction  tx = em.getTransaction();
+
+		List<Artist> ar;
+		try{
+			tx.begin();
+			Query q = em.createQuery("SELECT DISTINCT ar FROM Artist ar WHERE ar.nationality REGEXP :nationality");
+			q.setParameter("nationality", ".*" + nationality + ".*");
+			ar =q.getResultList();
+
+			LOG.debug("get Artist by nationality : " + nationality);
+		} catch (RuntimeException re) {
+			LOG.error("get Artist by nationality failed", re);
 			throw re;
 		}finally{
 			tx.commit();

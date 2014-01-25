@@ -61,7 +61,7 @@ public class ArtistEndPoints {
 
 	/* ---------------- GET -----------------------*/
 	@GET
-	@Path("get/all")
+	@Path("/all")
 	@Produces("application/json")
 	public List<Artist> getAllArtists() {
 		ArtistDao dao = new ArtistDao();
@@ -82,6 +82,22 @@ public class ArtistEndPoints {
 	public Artist getArtistByName(@PathParam("name")String name) {
 		ArtistDao dao = new ArtistDao();
 		return dao.getArtistByNameQuery(name);
+	}
+	
+	@GET
+	@Path("/byCity/{city}")
+	@Produces("application/json")
+	public List<Artist> getArtistByCity(@PathParam("city")String city) {
+		ArtistDao dao = new ArtistDao();
+		return dao.getArtistByCityQuery(city);
+	}
+	
+	@GET
+	@Path("/byNationality/{nationality}")
+	@Produces("application/json")
+	public List<Artist> getArtistByNationality(@PathParam("nationality")String nationality) {
+		ArtistDao dao = new ArtistDao();
+		return dao.getArtistByNationalityQuery(nationality);
 	}
 	public List<Artist> getRepresentedArtists() {return null;}
 }

@@ -41,7 +41,7 @@ import org.rest.service.entities.TypesAndTechniques;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+
 public class ArtWorkPersistenceTests {
 
 	static EntityManagerFactory emf = Persistence.createEntityManagerFactory("Museum");
