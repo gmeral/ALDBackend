@@ -75,18 +75,17 @@ public class MuseumDao {
 		a1.setDescription("Une description");
 		a2.setDescription("Une description");
 		a3.setDescription("Une autre description");
-		a1.setPhoto("http://www.jonathan-menet.fr/blog/wp-content/uploads/2013/07/faces-artiste-Vince-Low-7.jpg");
-		a2.setPhoto("http://www.jonathan-menet.fr/blog/wp-content/uploads/2013/07/faces-artiste-Vince-Low-7.jpg");
-		a3.setPhoto("http://www.jonathan-menet.fr/blog/wp-content/uploads/2013/07/faces-artiste-Vince-Low-7.jpg");
+		a1.setPhoto("http://e.maxicours.com/img/3/8/5/5/385570.jpg");
+		a2.setPhoto("http://www.vinyculture.com/wp-content/uploads/2013/05/sparrow.jpg");
 		a1.setBirthDate(new Date());
 		a2.setBirthDate(new Date());
 		a3.setBirthDate(new Date());
 		a1.setType(TypesAndTechniques.ArtWorkType.PAINTING);
 		a2.setType(TypesAndTechniques.ArtWorkType.DRAWING);
 		a3.setType(TypesAndTechniques.ArtWorkType.PHOTO);
-//		aw1.addArtist(a1);
-//		aw2.addArtist(a2);
-//		aw3.addArtist(a3);
+		aw1.setArtistName("Jack Sparow");
+		aw2.setArtistName("Jack Sparow");
+		aw3.setArtistName("Tom Savage");
 		try {
 			tx.begin();
 			em.persist(aw1);
