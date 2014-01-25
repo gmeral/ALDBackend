@@ -86,6 +86,7 @@ public class MuseumDao {
 		aw1.setArtistName("Jack Sparow");
 		aw2.setArtistName("Jack Sparow");
 		aw3.setArtistName("Tom Savage");
+		aw1.setExposed(true);
 		try {
 			tx.begin();
 			em.persist(aw1);

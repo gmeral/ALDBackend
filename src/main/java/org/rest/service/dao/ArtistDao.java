@@ -114,4 +114,24 @@ public class ArtistDao extends AbstractMuseumDao {
 		}
 		return ar;
 	}
+	
+	public  List<Artist> getRepresentedArtistsQuery() {
+		EntityTransaction  tx = em.getTransaction();
+
+		List<Artist> ar;
+		try{
+			tx.begin();
+			String sqlQuery = "SELECT * FROM ARTIST WHERE ARTIST.NAME IN (SELECT ARTISTNAME FROM ARTWORK WHERE ARTWORK.ISEXPOSED = true)";
+			Query q = em.createNativeQuery(sqlQuery, Artist.class);
+			ar =q.getResultList();
+
+			LOG.debug("get Represented Artists" + ar.size());
+		} catch (RuntimeException re) {
+			LOG.error("get Represented Artists failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+		return ar;
+	}
 }

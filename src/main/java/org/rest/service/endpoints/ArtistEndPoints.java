@@ -107,5 +107,12 @@ public class ArtistEndPoints {
 		ArtistDao dao = new ArtistDao();
 		return dao.getArtistByNationalityQuery(nationality);
 	}
-	public List<Artist> getRepresentedArtists() {return null;}
+	
+	@GET
+	@Path("/represented")
+	@Produces("application/json")
+	public List<Artist> getRepresentedArtists() {
+		ArtistDao dao = new ArtistDao();
+		return dao.getRepresentedArtistsQuery();
+		}
 }
