@@ -117,7 +117,7 @@ public class ArtworkDao extends AbstractMuseumDao {
 			tx.begin();
 			Query q = em.createQuery("SELECT DISTINCT aw FROM Artwork aw WHERE aw.support= :support");
 			LOG.debug("Technique parameter received : " + sup);
-			q.setParameter("technique", sup);
+			q.setParameter("support", sup);
 			list = q.getResultList();
 			LOG.debug("get Artworks by support successfull, result size: "+ list.size());
 		} catch (RuntimeException re) {
