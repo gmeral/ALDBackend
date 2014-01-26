@@ -154,4 +154,23 @@ public class ArtworkDao extends AbstractMuseumDao {
 		updatee.addComment(c);
 		return this.updateEntity(updatee);
 	}
+
+	public  List<Artwork> getRepresentedArtworksQuery() {
+		EntityTransaction  tx = em.getTransaction();
+
+		List<Artwork> ar;
+		try{
+			tx.begin();
+			Query q = em.createQuery("SELECT DISTINCT aw FROM Artwork aw WHERE aw.isExposed = true");
+			ar =q.getResultList();
+
+			LOG.debug("get Represented Artwork" + ar.size());
+		} catch (RuntimeException re) {
+			LOG.error("get Represented Artwork failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+		return ar;
+	}
 }

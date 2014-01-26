@@ -114,5 +114,5 @@ public class ArtistEndPoints {
 	public List<Artist> getRepresentedArtists() {
 		ArtistDao dao = new ArtistDao();
 		return dao.getRepresentedArtistsQuery();
-		}
+	}
 }

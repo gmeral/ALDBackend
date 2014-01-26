@@ -131,12 +131,20 @@ public class ArtworkEndPoints {
 		ArtworkDao dao = new ArtworkDao();
 		return dao.getArtworksByTypeQuery(type);
 	}
-	
+
 	@GET
 	@Path("/get/bySupport/{support}")
 	@Produces("application/json")
 	public List<Artwork> getArtworksBySupport(@PathParam("support")TypesAndTechniques.Support support){
 		ArtworkDao dao = new ArtworkDao();
 		return dao.getArtworksBySupportQuery(support);
+	}
+
+	@GET
+	@Path("/represented")
+	@Produces("application/json")
+	public List<Artwork> getRepresentedArtworks() {
+		ArtworkDao dao = new ArtworkDao();
+		return dao.getRepresentedArtworksQuery();
 	}
 }
