@@ -13,7 +13,8 @@ public class TypesAndTechniques {
 		AQUARELLE,
 		GOUACHE,
 		PEINTURE_HUILE,
-		PEINTURE_EAU
+		PEINTURE_EAU,
+		CHALUMEAU
 	}
 	
 	public enum Support {
@@ -29,7 +30,8 @@ public class TypesAndTechniques {
 		PLATRE_ET_STUC,
 		STAFF,
 		CIMENT,
-		PIERRE
+		PIERRE, 
+		BANANE
 	}
 	
 }
