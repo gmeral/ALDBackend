@@ -1,0 +1,160 @@
+'use strict';
+
+/* Directives */
+
+angular.module('miredot.directives', []);
+
+angular.module('miredot.directives')
+    /**
+    *  Renders a json-to
+    */
+    .directive('jsonTo', function ($compile) {
+
+        var _idCount = 0;
+        var getNewId = function() {
+            return _idCount++;
+        };
+
+        return {
+            restrict: 'E',
+            transclude: false,
+            scope: {
+                to:'=to',
+                tos: '=tos'
+            },
+            link: function (scope, element, attrs) {
+
+
+
+                /**
+                 * Recursively renders the given TO as json.
+                 * @param {Object | string} to The current object to render.
+                 * @param {Array} tos          A list of all known tos.
+                 * @param {Array} history      All TOs that have already been rendered in the path leading here.
+                 * @return {String}
+                 */
+                var build = function(to, tos, history) {
+                    var html = '';
+                    var jq = $('<div>');
+
+                    if (!angular.isObject(to)) {
+                        return to;
+                    }
+
+                    if (to.name === '[]') {
+                        jq.append('<span>[</span>')
+                          .after('<ul class="toContainer">')
+                                .append('<li>')
+                                .append(build(to.typeValue, tos, history))
+                                .append('<span>]</span>');
+                        return jq.text();
+                    }
+
+                    if (!angular.isObject(to.content) && !angular.isObject(to.typeValue)) {
+                        html += '<ul class="toContainer"><li><span class="parameterType">';
+                        if (to.values) {
+                            html += enumArrayToString(to.values);
+                        } else {
+                            html += to.name.replace('{}', 'object');
+                        }
+                        html += '</span></li></ul>';
+                        return html;
+                    }
+
+
+
+                    if (angular.isObject(to.content)) {
+                        var id = 'md_to_' + getNewId();
+
+                        html = '<a id="' + id + '_a" class="anchor"></a><div id="' + id + '">';
+                        html += '<span>{</span>';
+                        html += '<ul class="toContainer">';
+
+                        history = history || [to.name];
+
+                        to.__md_id = id;
+
+                        _.each(to.content, function(field) {
+                            html += '<li><span class="parameterName">' + field.name + ': </span>';
+                            if (!angular.isObject(field.typeValue)) {
+                                html += '<span class="parameterType">' + field.typeValue + '</span>';
+                            } else {
+                                if (field.typeValue.values) {
+                                    html += '<span class="parameterType">' + enumArrayToString(field.typeValue.values) + '</span>';
+                                } else {
+                                    var nextTypeValue = angular.isObject(field.typeValue.typeValue) ? field.typeValue.typeValue : field.typeValue;
+                                    if (history.indexOf(nextTypeValue.name) >= 0) {
+                                        var addHoverClass = 'onmouseover="$(\'#' + nextTypeValue.__md_id + '\').addClass(\'highlightJsonRecursive\');"';
+                                        var removeHoverClass = 'onmouseout="$(\'#' + nextTypeValue.__md_id + '\').removeClass(\'highlightJsonRecursive\');"';
+                                        html += (field.typeValue.name === '[]' ? '[' : '') +
+                                            '<a href="#' + nextTypeValue.__md_id + '_a"' + addHoverClass + ' ' + removeHoverClass + '>' +
+                                            '<i class="icon-retweet" style="color: #555"></i>' +
+                                            '</a>' + (field.typeValue.name === '[]' ? ']' : '');
+                                    } else {
+                                        var newHistory = history.slice(0); // clone the history
+                                        if (field.typeValue.name === '->') {
+                                            html += '{<span class="parameterType">string</span> =>';
+                                            if (angular.isObject(field.typeValue.typeValue)) {
+                                                html += '<ul class="toContainer"><li>';
+                                                html += build(field.typeValue.typeValue, tos, newHistory);
+                                                html += '</li></ul>';
+                                            } else {
+                                                html += '<span class="parameterType">' + field.typeValue.typeValue + '</span>';
+                                            }
+                                            html += ' }';
+                                        } else {
+                                            newHistory.push(nextTypeValue.name);
+                                            html += build(field.typeValue, tos, newHistory);
+                                        }
+                                    }
+                                }
+                            }
+                            html += "</li>";
+                        });
+
+                        html += '</ul>';
+                        html += '<span>}</span>';
+                        html += '</div>';
+                    }
+
+                    return html;
+                };
+
+
+                var newElement = angular.element(build(scope.to, scope.tos));
+                $compile(newElement)(scope);
+                element.replaceWith(newElement);
+            }
+        };
+    })
+
+    .directive('widthonblur', function () {
+        return function(scope, element, attrs) {
+            element.css("width", attrs.widthonblur);
+
+            element.bind("blur", function() {
+                element.css("width", attrs.widthonblur);
+            });
+        }
+    })
+    .directive('widthonfocus', function () {
+        return function(scope, element, attrs) {
+            element.bind("focus", function() {
+                element.css("width", attrs.widthonfocus);
+            })
+        }
+    })
+    .directive('licence', function() {
+        return {
+            restrict: 'E',
+            template: '<div id="licence" ng-hide="validLicence">' +
+            '<i class="icon-exclamation-sign failedIcon"></i> ' +
+            'Notice: This documentation was generated by MireDot while running in trial mode. ' +
+            'As such, only a random selection containing roughly 25% of the interfaces of the project have been included in this documentation. ' +
+            'If you like the output, you can get a licence key <a href="http://www.miredot.com/price.html">here</a> (free for open source projects).' +
+            '</div>'
+        };
+    })
+;
+
+
