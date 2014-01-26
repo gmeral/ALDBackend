@@ -149,6 +149,26 @@ public class ArtworkDao extends AbstractMuseumDao {
 		return list;
 	}
 
+	public  List<Artwork> getArtworksByNameQuery(String name){
+		EntityTransaction  tx = em.getTransaction();
+
+		List<Artwork> list;
+		try{
+			tx.begin();
+			Query q = em.createQuery("SELECT DISTINCT aw FROM Artwork aw WHERE aw.title REGEXP :name");
+			LOG.debug("Name parameter received : " + name);
+			q.setParameter("name", name);
+			list = q.getResultList();
+			LOG.debug("get Artworks by name successfull, result size: "+ list.size());
+		} catch (RuntimeException re) {
+			LOG.error("get Artworks by name failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+		return list;
+	}
+
 	public Response addCommentQuery(int id, Comment c) {
 		Artwork updatee = (Artwork)this.getEntityById(id);
 		updatee.addComment(c);

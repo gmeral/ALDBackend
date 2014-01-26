@@ -141,6 +141,14 @@ public class ArtworkEndPoints {
 	}
 
 	@GET
+	@Path("/get/byName/{name}")
+	@Produces("application/json")
+	public List<Artwork> getArtworksBySupport(@PathParam("name") String name){
+		ArtworkDao dao = new ArtworkDao();
+		return dao.getArtworksByNameQuery(name);
+	}
+
+	@GET
 	@Path("/represented")
 	@Produces("application/json")
 	public List<Artwork> getRepresentedArtworks() {
