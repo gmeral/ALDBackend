@@ -102,28 +102,28 @@ public class MuseumDao {
 		}finally{
 			tx.commit();
 		}
-		//		tx.begin();
-		//		Connection connection = em.unwrap(java.sql.Connection.class);
-		//		try {
-		//			IDatabaseConnection dbUnitCon = new DatabaseConnection(connection);
-		//			dbUnitCon.getConfig()
-		//			.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new H2DataTypeFactory());
-		//			IDataSet dataset;
-		//			FlatXmlDataSetBuilder flatXmlDataSetBuilder = new FlatXmlDataSetBuilder();
-		//			flatXmlDataSetBuilder.setColumnSensing(true);
-		//			InputStream in =Thread.currentThread()
-		//					.getContextClassLoader()
-		//					.getResourceAsStream("data/dataset.xml");
-		//			if(in !=null){
-		//				LOG.warn("DataSet found");
-		//				dataset = flatXmlDataSetBuilder.build(in);
-		//			} else {
-		//				LOG.warn("DataSet not found");
-		//				dataset= new DefaultDataSet();
-		//			}
-		//			DatabaseOperation.REFRESH.execute(dbUnitCon, dataset);
-		//		} finally {
-		//			tx.commit();
-		//		}
+				tx.begin();
+				Connection connection = em.unwrap(java.sql.Connection.class);
+				try {
+					IDatabaseConnection dbUnitCon = new DatabaseConnection(connection);
+					dbUnitCon.getConfig()
+					.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new H2DataTypeFactory());
+					IDataSet dataset;
+					FlatXmlDataSetBuilder flatXmlDataSetBuilder = new FlatXmlDataSetBuilder();
+					flatXmlDataSetBuilder.setColumnSensing(true);
+					InputStream in =Thread.currentThread()
+							.getContextClassLoader()
+							.getResourceAsStream("data/dataset.xml");
+					if(in !=null){
+						LOG.warn("DataSet found");
+						dataset = flatXmlDataSetBuilder.build(in);
+					} else {
+						LOG.warn("DataSet not found");
+						dataset= new DefaultDataSet();
+					}
+					DatabaseOperation.REFRESH.execute(dbUnitCon, dataset);
+				} finally {
+					tx.commit();
+				}
 	}
 }

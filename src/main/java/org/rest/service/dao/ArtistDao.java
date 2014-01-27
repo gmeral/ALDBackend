@@ -115,6 +115,7 @@ public class ArtistDao extends AbstractMuseumDao {
 		return ar;
 	}
 	
+	
 	public  List<Artist> getRepresentedArtistsQuery() {
 		EntityTransaction  tx = em.getTransaction();
 

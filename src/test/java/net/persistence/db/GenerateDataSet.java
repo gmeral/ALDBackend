@@ -42,13 +42,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ManytoManyPersistenceTests {
+public class GenerateDataSet {
 
 	static EntityManagerFactory emf = Persistence.createEntityManagerFactory("Museum");
 	static EntityManager em;
 	static EntityTransaction tx;
 
-	private static final Logger LOG = LoggerFactory.getLogger(ManytoManyPersistenceTests.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GenerateDataSet.class);
 
 
 	@Rule public TestName name = new TestName();
@@ -91,36 +91,6 @@ public class ManytoManyPersistenceTests {
 			tx.commit();
 		}
 	}
-
-//	@Test
-//	public void AtestTwoArtistsTwoArtworks() {
-//		System.out.println("TROLOLOLO");
-//		Dimensions dim = new Dimensions(15,20,30);
-//		Artwork aw1 = new Artwork(dim, "Chat");
-//		Artwork aw2 = new Artwork(dim, "Chien");
-//		Artist a1 = new Artist("catLover");
-//		Artist a2 = new Artist("dogLover");
-//		aw1.addArtist(a1);
-//		aw1.addArtist(a2);
-//		aw2.addArtist(a1);
-//		aw2.addArtist(a2);
-//		a1.addArtwork(aw1);
-//		a1.addArtwork(aw2);
-//		a2.addArtwork(aw1);
-//		a2.addArtwork(aw2);
-//		try {
-//			tx.begin();
-//			em.persist(aw1);
-//			em.persist(aw2);
-//			em.persist(a1);
-//			em.persist(a2);
-//		}catch (RuntimeException re) {
-//			LOG.error("AtestTwoArtistsTwoArtworks failed", re);
-//			throw re;
-//		}finally{
-//			tx.commit();
-//		}
-//	}
 
 	@Test
 	public void fillDB() {
