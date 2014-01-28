@@ -89,12 +89,12 @@ public class MuseumDao {
 		aw1.setExposed(true);
 		try {
 			tx.begin();
-			em.persist(aw1);
+			/*em.persist(aw1);
 			em.persist(aw2);
 			em.persist(aw3);
 			em.persist(a1);
 			em.persist(a2);
-			em.persist(a3);
+			em.persist(a3);*/
 
 		}catch (RuntimeException re) {
 			LOG.error("DtestArtWorkWithTitle failed", re);

@@ -100,11 +100,11 @@ public class GenerateDataSet {
 		Artwork aw = new Artwork(dim, TypesAndTechniques.Technique.GOUACHE, TypesAndTechniques.ArtWorkType.PAINTING, TypesAndTechniques.Support.CARTON);
 		aw.setTitle("Afrique, terre de la Terre");
 		aw.setDescription("Portrait, femme aux cheveux de terre, gouache sur carton.");
-		aw.setPhotos("http://www.oliance.com/huan/images/i_afriq01.jpg");
+		aw.setPhotos("http://www.oliance.com/huan/images/i_afriq01.jpg,http://www.streetartutopia.com/wp-content/uploads/2012/11/Street-Art-by-David-Walker-in-London-England.jpg");
 		aw.setTags(tags);
 
 		Set<String> tags2 = new HashSet<String>();
-		tags2.add("TURBAN");
+		tags2.add("TURBAN,AFRIQUE");
 		Artwork aw2 = new Artwork(dim, TypesAndTechniques.Technique.PEINTURE_HUILE, TypesAndTechniques.ArtWorkType.PAINTING, TypesAndTechniques.Support.TOILE_DE_LIN);
 		aw2.setTitle("La Jeune Fille à la perle");
 		aw2.setDescription("La Jeune Fille à la perle ou La Jeune Fille au turban (Meisje met de parel) est un tableau de Johannes Vermeer peint vers 1665, exposé au Mauritshuis de La Haye (huile sur toile, 45 × 40 cm). On l'appelle aussi la « Joconde du Nord ».");
@@ -112,7 +112,7 @@ public class GenerateDataSet {
 		aw2.setTags(tags2);
 		
 		Set<String> tags3 = new HashSet<String>();
-		tags3.add("TECHNIQUEIMPROBABLE");
+		tags3.add("TECHNIQUEIMPROBABLE,AFRIQUE,EAU");
 		Artwork aw3 = new Artwork(dim, TypesAndTechniques.Technique.CHALUMEAU, TypesAndTechniques.ArtWorkType.DRAWING, TypesAndTechniques.Support.PAPIER);
 		aw3.setTitle("Road by night");
 		aw3.setDescription("Paul Chojnowski mouille divers endroits de feuilles de papier avec de l’eau puis les il les brûle avec un chalumeau pour noircir certaines zones.");
@@ -140,7 +140,7 @@ public class GenerateDataSet {
 		Artwork aw6 = new Artwork(dim, null, TypesAndTechniques.ArtWorkType.SCULPTURE, TypesAndTechniques.Support.BANANE);
 		aw6.setTitle("Rocker");
 		aw6.setDescription("Créations d’un japonais qui sculpte ses bananes.");
-		aw6.setPhotos("http://www.tuxboard.com/photos/2011/04/Sculpture-banane-rocker.jpg");
+		aw6.setPhotos("http://fle-alice.eu/IMG/arton454.jpg,http://static1.businessinsider.com/image/51ed989469bedd321700001c/bankrupt-detroit-could-sell-its-billion-dollar-art-collection.jpg");
 		aw6.setTags(tags6);
 
 		Artist a1 = new Artist("FREDERIC HUAN");
@@ -151,21 +151,26 @@ public class GenerateDataSet {
 		Artist a6 = new Artist("Un Japonais");
 		
 		a1.setNationality("Français");
-		a1.setPhoto("http://acs-horizons.fr/uploads/images/fredhuan.jpg");
+		a1.setBirthDate(new Date());
 		
 		a2.setNationality("Neerlandaise");
-		a2.setBirthDate(new Date(1632, 10, 31));
+		a2.setBirthDate(new Date());
 		a2.setPhoto("http://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Cropped_version_of_Jan_Vermeer_van_Delft_002.jpg/220px-Cropped_version_of_Jan_Vermeer_van_Delft_002.jpg");
 		
 		a3.setNationality("Americain");
+		a3.setBirthDate(new Date());
 		a3.setPhoto("http://oneotafilmfestival.com/wp-content/uploads/Burt_Chojnowski.jpg");
 		
+		a4.setBirthDate(new Date());
 		a4.setPhoto("http://se.stallviken.com/image/cache/data/productpics/Astrid_Tank_Grey/Astrid_Tank_Grey-750x750.jpg");
 		
-		a5.setPhoto("http://s.ipernity.com/T/L/z.gif");
+		a5.setPhoto("http://www.flamewarriorsguide.com/Assets/artiste.jpg");
+		a5.setBirthDate(new Date());
+		a5.setDescription("Un japonais qui fait de l'art");
 		a5.setNationality("Française");
 		a5.setCity("Paris");
 		
+		a6.setBirthDate(new Date());
 		a6.setPhoto("http://photos.tuxboard.com/wp-content/uploads/2009/11/japonais-Sal9000-et-son-jeu.jpg");
 		
 		
