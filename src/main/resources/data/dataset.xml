@@ -2,18 +2,23 @@
 <dataset>
  <ARTCOLLECTION/>
   <ARTCOLLECTION_TAGS/>
-  <ARTIST ID="1" NAME="Astrid Linne" PHOTO="http://se.stallviken.com/image/cache/data/productpics/Astrid_Tank_Grey/Astrid_Tank_Grey-750x750.jpg"/>
-  <ARTIST ID="2" NAME="Un Japonais" PHOTO="http://photos.tuxboard.com/wp-content/uploads/2009/11/japonais-Sal9000-et-son-jeu.jpg"/>
-  <ARTIST ID="3" BIRTHDATE="3532-12-01" NAME="Johannes Vermeer" NATIONALITY="Neerlandaise" PHOTO="http://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Cropped_version_of_Jan_Vermeer_van_Delft_002.jpg/220px-Cropped_version_of_Jan_Vermeer_van_Delft_002.jpg"/>
-  <ARTIST ID="4" CITY="Paris" NAME="Thomas Subtil" NATIONALITY="Fran&#231;aise" PHOTO="http://s.ipernity.com/T/L/z.gif"/>
-  <ARTIST ID="5" NAME="FREDERIC HUAN" NATIONALITY="Fran&#231;ais" PHOTO="http://acs-horizons.fr/uploads/images/fredhuan.jpg"/>
-  <ARTIST ID="6" NAME="Paul Chojnowski" NATIONALITY="Americain" PHOTO="http://oneotafilmfestival.com/wp-content/uploads/Burt_Chojnowski.jpg"/>
-  <ARTWORK ID="1" ARTISTNAME="FREDERIC HUAN" DESCRIPTION="Portrait, femme aux cheveux de terre, gouache sur carton." ISEXPOSED="false" PHOTOS="http://www.oliance.com/huan/images/i_afriq01.jpg" SUPPORT="CARTON" TECHNIQUE="GOUACHE" TITLE="Afrique, terre de la Terre" TYPE="PAINTING" X="20.0" Y="20.0" Z="30.0"/>
-  <ARTWORK ID="2" ARTISTNAME="Un Japonais" DESCRIPTION="Cr&#233;ations d&#8217;un japonais qui sculpte ses bananes." ISEXPOSED="false" PHOTOS="http://www.tuxboard.com/photos/2011/04/Sculpture-banane-rocker.jpg" SUPPORT="BANANE" TITLE="Rocker" TYPE="SCULPTURE" X="20.0" Y="20.0" Z="30.0"/>
-  <ARTWORK ID="3" ARTISTNAME="Johannes Vermeer" DESCRIPTION="La Jeune Fille &#224; la perle ou La Jeune Fille au turban (Meisje met de parel) est un tableau de Johannes Vermeer peint vers 1665, expos&#233; au Mauritshuis de La Haye (huile sur toile, 45 &#215; 40 cm). On l&apos;appelle aussi la &#171; Joconde du Nord &#187;." ISEXPOSED="false" PHOTOS="http://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Johannes_Vermeer_%281632-1675%29_-_The_Girl_With_The_Pearl_Earring_%281665%29.jpg/280px-Johannes_Vermeer_%281632-1675%29_-_The_Girl_With_The_Pearl_Earring_%281665%29.jpg" SUPPORT="TOILE_DE_LIN" TECHNIQUE="PEINTURE_HUILE" TITLE="La Jeune Fille &#224; la perle" TYPE="PAINTING" X="20.0" Y="20.0" Z="30.0"/>
-  <ARTWORK ID="4" ARTISTNAME="Thomas Subtil" DESCRIPTION="Quel &#233;quilibre !" ISEXPOSED="false" PHOTOS="http://golem13.fr/wp-content/uploads/2013/07/Thomas-Subtil-04.jpg" SUPPORT="PAPIER" TITLE="Elephant du cirque" TYPE="PHOTO" X="20.0" Y="20.0" Z="30.0"/>
+  <ARTIST ID="1" BIRTHDATE="2014-01-30" NAME="Un Japonais" PHOTO="http://photos.tuxboard.com/wp-content/uploads/2009/11/japonais-Sal9000-et-son-jeu.jpg"/>
+  <ARTIST ID="2" BIRTHDATE="2014-01-30" NAME="Astrid Linne" PHOTO="http://se.stallviken.com/image/cache/data/productpics/Astrid_Tank_Grey/Astrid_Tank_Grey-750x750.jpg"/>
+  <ARTIST ID="3" BIRTHDATE="2014-01-30" NAME="Johannes Vermeer" NATIONALITY="Neerlandaise" PHOTO="http://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Cropped_version_of_Jan_Vermeer_van_Delft_002.jpg/220px-Cropped_version_of_Jan_Vermeer_van_Delft_002.jpg"/>
+  <ARTIST ID="4" BIRTHDATE="2014-01-30" CITY="Paris" DESCRIPTION="Un japonais qui fait de l&apos;art" NAME="Thomas Subtil" NATIONALITY="Fran&#231;aise" PHOTO="http://www.flamewarriorsguide.com/Assets/artiste.jpg"/>
+  <ARTIST ID="5" BIRTHDATE="2014-01-30" NAME="Paul Chojnowski" NATIONALITY="Americain" PHOTO="http://oneotafilmfestival.com/wp-content/uploads/Burt_Chojnowski.jpg"/>
+  <ARTIST ID="6" BIRTHDATE="2014-01-30" NAME="FREDERIC HUAN" NATIONALITY="Fran&#231;ais"/>
+  <ARTWORK ID="1" ARTISTNAME="Thomas Subtil" DESCRIPTION="Quel &#233;quilibre !" ISEXPOSED="false" PHOTOS="http://golem13.fr/wp-content/uploads/2013/07/Thomas-Subtil-04.jpg" SUPPORT="PAPIER" TITLE="Elephant du cirque" TYPE="PHOTO" X="20.0" Y="20.0" Z="30.0"/>
+  <ARTWORK ID="2" ARTISTNAME="Un Japonais" DESCRIPTION="Cr&#233;ations d&#8217;un japonais qui sculpte ses bananes." ISEXPOSED="false" PHOTOS="http://fle-alice.eu/IMG/arton454.jpg,http://static1.businessinsider.com/image/51ed989469bedd321700001c/bankrupt-detroit-could-sell-its-billion-dollar-art-collection.jpg" SUPPORT="BANANE" TITLE="Rocker" TYPE="SCULPTURE" X="20.0" Y="20.0" Z="30.0"/>
+  <ARTWORK ID="3" ARTISTNAME="Astrid Linne" DESCRIPTION="peinture r&#233;aliste" ISEXPOSED="false" PHOTOS="http://www.laboiteverte.fr/wp-content/uploads/2011/01/peinture-realiste-eau-01.jpg" SUPPORT="PAPIER" TECHNIQUE="PEINTURE_EAU" TITLE="Douche" TYPE="PAINTING" X="20.0" Y="20.0" Z="30.0"/>
+  <ARTWORK ID="4" ARTISTNAME="FREDERIC HUAN" DESCRIPTION="Portrait, femme aux cheveux de terre, gouache sur carton." ISEXPOSED="false" PHOTOS="http://www.oliance.com/huan/images/i_afriq01.jpg,http://www.streetartutopia.com/wp-content/uploads/2012/11/Street-Art-by-David-Walker-in-London-England.jpg" SUPPORT="CARTON" TECHNIQUE="GOUACHE" TITLE="Afrique, terre de la Terre" TYPE="PAINTING" X="20.0" Y="20.0" Z="30.0"/>
   <ARTWORK ID="5" ARTISTNAME="Paul Chojnowski" DESCRIPTION="Paul Chojnowski mouille divers endroits de feuilles de papier avec de l&#8217;eau puis les il les br&#251;le avec un chalumeau pour noircir certaines zones." ISEXPOSED="false" PHOTOS="http://www.laboiteverte.fr/wp-content/uploads/2011/06/peinture-feu-eau-02.jpg" SUPPORT="PAPIER" TECHNIQUE="CHALUMEAU" TITLE="Road by night" TYPE="DRAWING" X="20.0" Y="20.0" Z="30.0"/>
-  <ARTWORK ID="6" ARTISTNAME="Astrid Linne" DESCRIPTION="peinture r&#233;aliste" ISEXPOSED="false" PHOTOS="http://www.laboiteverte.fr/wp-content/uploads/2011/01/peinture-realiste-eau-01.jpg" SUPPORT="PAPIER" TECHNIQUE="PEINTURE_EAU" TITLE="Douche" TYPE="PAINTING" X="20.0" Y="20.0" Z="30.0"/>
-  <ARTWORKPHOTO/>
+  <ARTWORK ID="6" ARTISTNAME="Johannes Vermeer" DESCRIPTION="La Jeune Fille &#224; la perle ou La Jeune Fille au turban (Meisje met de parel) est un tableau de Johannes Vermeer peint vers 1665, expos&#233; au Mauritshuis de La Haye (huile sur toile, 45 &#215; 40 cm). On l&apos;appelle aussi la &#171; Joconde du Nord &#187;." ISEXPOSED="false" PHOTOS="http://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Johannes_Vermeer_%281632-1675%29_-_The_Girl_With_The_Pearl_Earring_%281665%29.jpg/280px-Johannes_Vermeer_%281632-1675%29_-_The_Girl_With_The_Pearl_Earring_%281665%29.jpg" SUPPORT="TOILE_DE_LIN" TECHNIQUE="PEINTURE_HUILE" TITLE="La Jeune Fille &#224; la perle" TYPE="PAINTING" X="20.0" Y="20.0" Z="30.0"/>
+  <ARTWORK_TAGS ARTWORK_ID="1" TAGS="CIRQUE"/>
+  <ARTWORK_TAGS ARTWORK_ID="2" TAGS="MIAM"/>
+  <ARTWORK_TAGS ARTWORK_ID="3" TAGS="EAU"/>
+  <ARTWORK_TAGS ARTWORK_ID="4" TAGS="AFRIQUE"/>
+  <ARTWORK_TAGS ARTWORK_ID="5" TAGS="TECHNIQUEIMPROBABLE,AFRIQUE,EAU"/>
+  <ARTWORK_TAGS ARTWORK_ID="6" TAGS="TURBAN,AFRIQUE"/>
   <COMMENT/>
 </dataset>

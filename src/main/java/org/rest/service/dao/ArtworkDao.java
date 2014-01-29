@@ -20,6 +20,8 @@ public class ArtworkDao extends AbstractMuseumDao {
 		entityClass = Artwork.class;
 		LOG = LoggerFactory.getLogger(this.getClass());
 	}
+	
+	/* Version de getArtworksByArtistQuery avec la relation ManytoMany */
 
 	// public  List<Artwork> getArtworksByArtistQuery(String name){
 	// 	EntityTransaction  tx = em.getTransaction();
@@ -58,6 +60,8 @@ public class ArtworkDao extends AbstractMuseumDao {
 		}
 		return list;
 	}
+	
+	/*Methodologie Objet pour une requête complexe impliquant une collection d'élément basique*/
 
 	public  List<Artwork> getArtworksByTagQuery(String tag){
 		ArtworkDao dao = new ArtworkDao();
